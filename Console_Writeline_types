@@ -1,0 +1,22 @@
+using System;
+
+namespace program1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {   
+           
+            Console.WriteLine("Enter firstname:");
+            string fName = Console.ReadLine();
+            Console.WriteLine("Enter lastname:");
+            string lName = Console.ReadLine();
+            //concatenation
+            Console.WriteLine("Fullname : " + fName+lName);
+            
+            //parameterised
+            Console.WriteLine("Fullname :{0} {1}",fName,lName); 
+
+        }
+    } 
+}
