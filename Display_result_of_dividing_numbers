@@ -1,0 +1,17 @@
+using System;
+
+namespace program2
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            //Display sum of two numbers 
+            Console.WriteLine("Enter a:");
+            int a = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Enter b:");
+            int b = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Divide: " + (a/b));
+        }
+    }
+}
