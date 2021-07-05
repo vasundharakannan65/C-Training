@@ -1,0 +1,20 @@
+using System;
+
+namespace program1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {   
+            //Take input from user and display 
+            Console.WriteLine("Enter firstname:");
+            string fName = Console.ReadLine();
+            Console.WriteLine("Enter lastname:");
+            string lName = Console.ReadLine();
+            Console.WriteLine("Firstname : " + fName);
+            Console.WriteLine("Lastname : " + lName); 
+            Console.WriteLine("Fullname :{0} {1}",fName,lName); 
+
+        }
+    } 
+}
