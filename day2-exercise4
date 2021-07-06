@@ -1,0 +1,15 @@
+using System;
+
+namespace reverse
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            char myVal1 = Convert.ToChar(Console.ReadLine());
+            char myVal2 = Convert.ToChar(Console.ReadLine());
+            char myVal3 = Convert.ToChar(Console.ReadLine()); 
+            Console.WriteLine("Reversing the char:{2} {1} {0}",myVal1,myVal2,myVal3);
+        }
+    }
+}
