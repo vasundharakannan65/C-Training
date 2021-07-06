@@ -1,0 +1,88 @@
+using System;
+
+namespace exercise1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            //A program should have all available primitive data types and 
+            //display them in a formatted way 
+
+            //boolean 
+            bool isValid = true; 
+            Console.WriteLine("enter strings:");
+            var myValue1 = Console.ReadLine();
+            var myValue2 = Console.ReadLine();
+            
+            if (myValue1 == myValue2) {
+                Console.WriteLine("boolean val:"+isValid);}
+            else{
+                isValid = false;
+                Console.WriteLine("boolean val:"+isValid); }
+            Console.WriteLine("***********************************************");
+            //signed integral - sbyte,short,int,long
+            //sbyte range -128 to +127
+            sbyte mySbyte = 127;
+            Console.WriteLine("sbyte min val:{0} max val:{1}",sbyte.MinValue,sbyte.MaxValue);
+            try{
+                checked{
+                mySbyte+=1;
+                Console.WriteLine("sbyte val:"+mySbyte);
+            }}
+            catch{
+                Console.WriteLine("exception-sbyte");
+            }
+
+            //short -32,768 to 32,767 
+            short myShort = 12225;
+            Console.WriteLine(myShort.GetType());
+            //int -2,147,483,648 to 2,147,483,647 
+            //long -9,223,372,036,854,775,808 to 9,223,372,036,854,775,807
+            Console.WriteLine("***********************************************");
+            //unsigned integral - byte,ushort,uint,ulong 
+            //byte 0-127 
+            byte mybyte = 126;
+            Console.WriteLine("byte min val:{0} max val:{1}",byte.MinValue,byte.MaxValue);
+            try{
+                checked{
+                mybyte+=1;
+                Console.WriteLine("byte val:"+mybyte);
+            }}
+            catch{
+                Console.WriteLine("exception-byte");
+            } 
+
+            //ushort 0 to 65,535 
+            ushort myUshort = 12225;
+            Console.WriteLine(myUshort.GetType());
+
+            //uint 	0 to 4,294,967,295
+            //ulong 0 to 18,446,744,073,709,551,615
+            Console.WriteLine("***********************************************");
+            //floating point - float,double 
+            float numF = -3629.4586F;
+            Console.WriteLine("float num: " + numF);
+            Console.WriteLine("Size of a float variable: " + sizeof(float));
+
+            string numberString = "1234.56";
+            double number = double.Parse(numberString); 
+            Console.WriteLine("double num:"+number);
+            Console.WriteLine("***********************************************");
+            //char 
+            Console.WriteLine("enter char y/n");
+            char myChar = Convert.ToChar(Console.ReadLine());
+            if (myChar == 'y') 
+                Console.WriteLine("valid data"); 
+            else 
+                Console.WriteLine("invalid data");
+            Console.WriteLine("***********************************************");
+            //decimal  
+            Console.WriteLine("enter a decimal val");
+            decimal myDecimal = Convert.ToDecimal(Console.ReadLine());
+            Console.WriteLine("decimal val:"+(myDecimal+10));
+
+
+        }
+    }
+}
