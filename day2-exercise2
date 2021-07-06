@@ -1,0 +1,46 @@
+using System;
+
+namespace pconsole
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            /*Add  an int with decimal 
+            Divide a decimal with an int
+            Multiply two floats
+            Console write them in a concatenated way*/ 
+
+            int myVal1 = Convert.ToInt32(Console.ReadLine());
+            decimal myVal2 = Convert.ToDecimal(Console.ReadLine());
+
+            float myFloat1 = float.Parse(Console.ReadLine());
+            float myFloat2 = float.Parse(Console.ReadLine()); 
+            //addition
+            try{
+                Console.WriteLine("Add  an int with decimal:" +(myVal1+myVal2));
+            }
+            catch{
+                Console.WriteLine("Exception occured-Add  an int with decimal");
+            }  
+
+            //division
+            try{
+                Console.WriteLine("Divide a decimal with an int:"+(myVal2/myVal1));
+            }
+            catch{
+                Console.WriteLine("Exception occured!!-Divide a decimal with an int");
+            }  
+
+            //multiply
+            try{
+                Console.WriteLine("Multiply two floats:"+(myFloat1 * myFloat2));
+            }
+            catch{
+                Console.WriteLine("Exception occured!!-Multiply two floats");
+            } 
+           
+
+        }
+    }
+}
