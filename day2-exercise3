@@ -1,0 +1,19 @@
+using System;
+
+namespace exercise4
+{
+    class Program
+    {
+        static void Main(string[] args)
+        { 
+            //Write a program to accept details like Id ,Name, Salary all using string variables. 
+            //When showing the results typecast Id and Salary to the suitable data types.
+            string myID = Console.ReadLine();
+            string myName = Console.ReadLine();
+            string mySalary = Console.ReadLine();
+             
+            Console.WriteLine("ID: {0} NAME: {1} SALARY: {2}",Convert.ToInt32(myID),myName,Convert.ToInt32(mySalary));
+
+        }
+    }
+}
