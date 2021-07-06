@@ -1,0 +1,41 @@
+using System;
+
+namespace program_day2
+{
+    class Program
+    {
+        static void Main(string[] args)
+        { 
+            //Getting strings and comparing
+             /*
+             Using command line arguments
+             Console.WriteLine("enter two strings with space between :");
+             string myStr1 = args[0];
+             string myStr2 = args[1];*/ 
+             Console.WriteLine("enter the string:");
+             string myStr1 = Console.ReadLine();
+             string myStr2 = Console.ReadLine();
+             //comparing using "==" operator gives boolean values as op
+             //bool val1 = Convert.ToBoolean(myStr1 == myStr2); 
+             Console.WriteLine(myStr1 == myStr2); 
+             var myStr3 = myStr1.Length; 
+             var myStr4 = myStr2.Length;
+
+             //getting numbers and comparing 
+             int myVal1 , myVal2;
+             Console.WriteLine("enter the number:");
+             myVal1 = Convert.ToInt32(Console.ReadLine());
+             myVal2 = Convert.ToInt32(Console.ReadLine()); 
+             Console.WriteLine(myVal1 == myVal2);
+
+            //comparing using "&&" operator
+            Console.WriteLine( myStr3 >= myStr4 && myVal1 >= myVal2 );
+
+            //Conditional statement
+            if( myStr3 >= myStr4 && myVal1 >= myVal2 )
+                Console.WriteLine("True");
+            else 
+                Console.WriteLine("False");
+        }
+    }
+}
