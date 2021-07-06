@@ -1,0 +1,54 @@
+using System;
+
+namespace calculator
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {   
+            
+            var myVal1 = Convert.ToInt32(Console.ReadLine());
+            var myVal2 = Convert.ToInt32(Console.ReadLine());
+
+            var myOperator = Console.ReadLine();
+
+            switch (myOperator)
+            {
+                case "+":
+                    Console.WriteLine("Add:"+(myVal1+myVal2));
+                    break; 
+                case "-": 
+                    Console.WriteLine("sub:"+(myVal1-myVal2)); 
+                    break;
+                case "*":
+                    Console.WriteLine("Mul:"+(myVal1*myVal2));
+                    break; 
+                case "/":
+                    if (myVal1 != 0 && myVal2 != 0) {
+                    if (myVal1 > myVal2) {
+                    Console.WriteLine("Div:"+(myVal1/myVal2));
+                    }
+                    else
+                    { 
+                    Console.WriteLine("Div:"+(myVal2/myVal1));
+                    }} 
+                    else
+                    Console.WriteLine("divide by zero exception");
+                    break; 
+                case "%":
+                    Console.WriteLine("Mod:"+(myVal1%myVal2));
+                    break; 
+                case "++":
+                    Console.WriteLine("pre-increment:{0} post-increment: {1}",(++myVal1),(myVal1++));
+                    break;
+                case "--":
+                    Console.WriteLine("pre-decrement: {0} post-decrement: {1}",(--myVal2),(myVal2--));
+                     break;  
+                default : 
+                    Console.WriteLine("Invalid data");
+                    break;
+                    
+            }
+        }
+    }
+}
