@@ -1,0 +1,27 @@
+//Write a program and ask the user to enter the width and height of an image. 
+// determine if it is a landscape or portrait.  Use enums to store landscape 
+//and portrait values.  Use Ternary operator in conditional statement. 
+
+
+using System;
+
+namespace Exercise4
+{
+    class Program
+    {   
+        //[Use enums to store landscape and portrait values - Not sure how to use]
+        static void Main(string[] args)
+        {    
+            Console.WriteLine("Enter the width:");
+            var myWidthimg = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Enter the height:"); 
+            var myHeightimg = Convert.ToInt32(Console.ReadLine());
+
+            var resultVal = (myHeightimg < myWidthimg) ? "LANDSCAPE" : "PORTRAIT" ;
+
+            Console.WriteLine(resultVal);
+
+
+        }
+    }
+}
