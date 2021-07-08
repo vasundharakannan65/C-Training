@@ -1,0 +1,50 @@
+//Create a program to accept an array of integers. 
+//Find the duplicate values and store them in a new integer array.
+
+using System;
+using System.Collections;
+
+namespace Exercise1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {   
+            
+            Console.WriteLine("Enter the length of array: ");
+            var myLength = Convert.ToInt32(Console.ReadLine()); 
+
+            int[] myArray = new int[myLength];
+            var myNewArray = new ArrayList();
+            
+            
+            for (int i = 0; i < myArray.Length; i++)
+            {
+                myArray[i] = Convert.ToInt32(Console.ReadLine());
+            } 
+
+            
+            for (int i = 0; i < myArray.Length; i++)
+            {
+                for (int j =i+1; j < myArray.Length; j++)
+                {
+                    if (myArray[i] == myArray[j]) 
+                    { 
+                        myNewArray.Add(myArray[i]);
+                    } 
+                
+                }
+                
+            }
+
+            Console.WriteLine("Resulting array of Duplicates:");
+            foreach (var item in myNewArray)
+            {
+                Console.Write(item+" ");
+            }
+
+        } 
+
+        
+    }
+}
