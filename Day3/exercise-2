@@ -1,0 +1,49 @@
+//Create a Class called customer with properties customername, customerId  and with 
+//two methods – place order , Getcustomertimezone . Where the GetCustomerTimeZone  
+//method is static.  Instantiate the class and call both the methods.  
+//Copy the object to a new variable and change one of the properties.  
+//And display the value of both objects.
+
+
+using System;
+
+namespace Exercise2
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Customer custObj = new Customer(); 
+            custObj.PlaceOrder(10,"Vasu"); 
+            Customer.GetCustomerTimeZone();
+            //using class name because static method cannot be instantiated
+
+            Console.WriteLine("****************************************");
+
+            var copyObj = custObj;//copying object to variable
+            copyObj.PlaceOrder(10,"vasudhra");
+            Customer.GetCustomerTimeZone();
+
+        } 
+
+        public class Customer 
+        {            
+            public int customerId;
+            public string customerName;
+            
+
+            DateTime dt1 = new DateTime(); 
+
+            public void PlaceOrder(int customerId, string customerName)
+            { 
+                Console.WriteLine($"{customerId}-{customerName} has placed the order!",customerId,customerName);
+            } 
+
+            public static void GetCustomerTimeZone() 
+            { 
+                Console.WriteLine("getting Timezone");
+            }
+            
+        }
+    }
+}
