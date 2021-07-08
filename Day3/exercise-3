@@ -1,0 +1,27 @@
+//Accept State and Country name from User,  Check if country name is "India"  
+//and if the condition is met  check if state is "Kerala" , then rerun user true  or false.  
+//Do this using conditional / ternary operators.  the names entered by user should be case 
+//insensitive ("INDIA" and "India" are the same) , use this in your conditional checks. 
+
+
+using System;
+
+namespace Exercise3
+{
+    class Program
+    {
+        static void Main(string[] args)
+        { 
+            Console.WriteLine("Enter the state name:");
+            var stateName = Console.ReadLine();
+            Console.WriteLine("Enter the country name:");
+            var countryName = Console.ReadLine();
+
+            var resultValue = (countryName == "INDIA" || countryName == "India") ?
+             (( stateName == "KERALA" || stateName == "Kerala") ? "True" : "False") : "False" ;
+
+            Console.WriteLine(resultValue);
+
+        }
+    }
+}
