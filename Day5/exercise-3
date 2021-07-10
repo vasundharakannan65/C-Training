@@ -1,0 +1,30 @@
+/*I have a large text, but have to display only 20 characters of the text and display but 
+ensure you won't break the word appearing in the end. So It can go a little beyond 20 
+characters ensuring we won't break the word. example:  Lorem Ipsum is simply dummy text 
+of the printing and typesetting industry. Lorem Ipsum has been the industry's standard 
+Output :Lorem Ipsum is simply dummy*/
+
+
+using System;
+
+namespace Exercise4
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {   
+            Console.WriteLine("Enter the text: ");
+            var myString = Console.ReadLine();
+            Console.WriteLine("Enter the characters that you want to display: ");
+            var myChar = Convert.ToInt32(Console.ReadLine()); 
+            
+            if ((myString == null) || (myString.Length < myChar))
+                Console.WriteLine("Please give proper input"); 
+            else
+                Console.WriteLine(myString.Substring(0,myString.IndexOf(" ",myChar)));
+         
+            //string v = String.Join(" ", myString.Split(' ').Take(myChar));
+      
+        }
+    }
+}
