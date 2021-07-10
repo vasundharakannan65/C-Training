@@ -14,7 +14,7 @@ namespace Exercise3
         static void Main(string[] args)
         {    
 		    List<int> myList = new List<int>();
-            List<int> myNewList = new List<int>();
+           	    List<int> myNewList = new List<int>();
             
 		    while(true)
 		    {
