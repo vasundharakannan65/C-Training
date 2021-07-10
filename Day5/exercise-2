@@ -1,0 +1,56 @@
+/*Write a program which continuously takes input numbers from user. 
+If user types “Quit” then exit.  Separate the duplicates and make a 
+new list for unique numbers. Example:  3,2,3,1,10,1 .  2 and 10 are unique*/
+
+
+using System;
+using System.Collections.Generic; 
+using System.Linq;
+
+namespace Exercise3
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {    
+		    List<int> myList = new List<int>();
+            List<int> myNewList = new List<int>();
+            
+		    while(true)
+		    {
+			    Console.WriteLine("Enter the number or type \"Quit\": ");
+			    var myValue = Console.ReadLine();
+			
+			    if(myValue.Equals("Quit") == true)
+				    break;
+			    else
+			    {
+				    var myNum = Convert.ToInt32(myValue);
+					myList.Add(myNum);
+			    }
+		    } 
+
+            for (int i = 0; i < myList.Count; i++)
+            {
+                for (int j = i+1; j < myList.Count; j++)
+                {
+                    if (myList[i] == myList[j]) 
+                    {  
+                        myNewList.Add(myList[i]);
+                    } 
+                
+                }
+                
+            }   
+
+            //Except - returns elements from the first  list which do not exist in the second list
+            var result = myList.Except(myNewList);
+
+            foreach(int item in result)
+                Console.Write("{0} ",item);
+
+            
+		   
+        }
+    }
+}
