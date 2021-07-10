@@ -1,0 +1,30 @@
+//Ask the user to enter the time in 24 hours format (eg: 17:00), If the time 
+//is between 00:00  and 23:59  then display as valid time else display as invalid time. 
+
+
+using System;
+
+namespace Exercise5
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            
+            //DateTime myTime = DateTime.Now; - To get current time 
+            //Using exception because of line 19
+            try 
+            {
+                Console.WriteLine("Enter the time in 24hr format: ");
+                DateTime myTime = Convert.ToDateTime(Console.ReadLine()); 
+                if ((myTime.Hour >= 0 && myTime.Minute >= 0) && (myTime.Hour <= 23 && myTime.Hour <= 59))
+                    Console.WriteLine("Valid Time");
+            }
+            catch 
+            {    
+                Console.WriteLine("Invalid Time");
+            } 
+
+        }
+    }
+}
