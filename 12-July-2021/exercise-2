@@ -1,0 +1,70 @@
+/*A program to convert the decimal to DMS (GPS coordinates). Make use of all datatypes concepts 
+and also use classes and methods as much as possible. Also learn an make use of Math 
+Function, if required*/
+
+
+using System;
+
+namespace Exercise3
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {   
+            //Only possible with floating point - datatypes 
+            decimal myDecimal = 156.742m;
+            float myFloat = 2899.4f;
+            double myDouble = 8989.45;
+
+            Coordinates coorObj  = new Coordinates();
+            coorObj.ConversionOfDecimal(myDecimal);
+            coorObj.ConversionOfFloat(myFloat);
+            coorObj.ConversionOfDouble(myDouble);
+
+
+        }
+    }
+}
+
+using System;
+
+namespace Exercise3
+{
+    public class Coordinates
+    {
+    
+        public void ConversionOfDecimal(decimal myValue)
+        {
+            var myDegree = Math.Truncate(myValue);
+            var myMinute = (myValue - myDegree) * 60;
+            var myTruncatedValue = Math.Truncate(myMinute);
+            var mySecond = (myMinute - myTruncatedValue) * 60;
+            var mySecondValue = Math.Round(mySecond);
+
+            Console.WriteLine($"{myDegree} degrees {myTruncatedValue} minutes {mySecondValue} seconds");
+        }
+        
+        public void ConversionOfFloat(float myValue)
+        {
+            var myDegree = Math.Truncate(myValue);
+            var myMinute = (myValue - myDegree) * 60;
+            var myTruncatedValue = Math.Truncate(myMinute);
+            var mySecond = (myMinute - myTruncatedValue) * 60;
+            var mySecondValue = Math.Round(mySecond);
+
+            Console.WriteLine($"{myDegree} degrees {myTruncatedValue} minutes {mySecondValue} seconds");
+        } 
+
+        public void ConversionOfDouble(double myValue)
+        {
+            var myDegree = Math.Truncate(myValue);
+            var myMinute = (myValue - myDegree) * 60;
+            var myTruncatedValue = Math.Truncate(myMinute);
+            var mySecond = (myMinute - myTruncatedValue) * 60;
+            var mySecondValue = Math.Round(mySecond);
+
+            Console.WriteLine($"{myDegree} degrees {myTruncatedValue} minutes {mySecondValue} seconds");
+        } 
+
+    }
+}
