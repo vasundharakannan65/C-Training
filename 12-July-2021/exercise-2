@@ -1,0 +1,51 @@
+/*Write a program which works like a 3D graph moves. where the user enters x , y and z 
+coordinates.This program should take user inputs initialization using a constructor. 
+The program can have a Move() method to register the new location. Overload method 
+using value types (int x, int y, intz) and also by passing the actual class instance 
+(which has fields x,y  and z)Consider basic exception handling where ever applicable*/
+
+using System;
+
+namespace Exercise2
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {   
+            
+            var myX = Convert.ToInt32(Console.ReadLine());
+            var myY = Convert.ToInt32(Console.ReadLine());
+            var myZ = Convert.ToInt32(Console.ReadLine()); 
+
+            Graph graphObj = new Graph(myX,myY,myZ);
+            graphObj.Move();
+
+        }
+    }
+}
+
+using System; 
+
+namespace Exercise2 
+{
+    public class Graph 
+    { 
+        public int myX, myY, myZ;
+        public Graph(int a,int b,int c)  
+        {     
+            this.myX = a;
+            this.myY = b;
+            this.myZ = c;
+            Console.WriteLine("location: {0} {1} {2}",myX,myY,myZ);
+        }  
+
+        public void Move(int myX = 10,int myY = 20,int myZ = 30)
+        {   
+
+            Console.WriteLine("New location: {0} {1} {2}",myX,myY,myZ);
+        }
+        
+        
+
+    }
+}
