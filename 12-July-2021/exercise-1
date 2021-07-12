@@ -1,0 +1,84 @@
+/*Write a calculator program which performs all simple arithmetic operations.The number of 
+inputs for addition and multiplication can be dynamic.All 4 operation addition, subtraction, 
+multiplication and division methods should have the same name. */
+
+
+using System;
+using System.Collections.Generic;
+
+namespace Exercise1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {   
+
+            var myList1 = new List<int>();
+            var myList2 = new List<int>();
+            Calculator calObj = new Calculator();
+            Console.WriteLine(String.Format("Addition of numbers: {0}",(calObj.CalculatorMethods(1,2,3,100))));
+            Console.WriteLine(String.Format("Subtraction of numbers: {0}",(calObj.CalculatorMethods(23.50m,24.50m))));
+            Console.WriteLine(String.Format("Multiplication of numbers: {0}",(calObj.CalculatorMethods(5.0f,6.9f,1.00f))));
+            Console.WriteLine(String.Format("Division of numbers: {0}",(calObj.CalculatorMethods(10,0))));
+        }
+    }
+}
+
+using System;
+
+namespace Exercise1
+{
+    public class Calculator
+    {
+        public Calculator()
+        {   
+            //public const int myValue = 0;
+            Console.WriteLine("Constructor is invoked");
+        } 
+
+        //ADD
+        public int CalculatorMethods(params int[] myList1)
+        {   
+            int sum = 0;
+            foreach (var item in myList1)
+            {
+                sum+=item;
+            } 
+            return sum;
+        } 
+
+        //SUBTRACT
+        public decimal CalculatorMethods(decimal a,decimal b)
+        {   
+            decimal myDec = a - b;
+            return myDec;
+        } 
+
+        //MULTIPLY
+        public float CalculatorMethods(params float[] myList2)
+        {   
+            float multiply = 1;
+            foreach (var item in myList2)
+            {
+                multiply*=item;
+            } 
+            return multiply;
+        }  
+
+        //DIVIDE
+        public int CalculatorMethods(int a, int b)
+        {   
+            try
+            {
+                int myQuotient = a/b;
+                return myQuotient;
+            }
+            catch 
+            {
+                return 0;
+            }
+
+        }
+        
+    }
+}
