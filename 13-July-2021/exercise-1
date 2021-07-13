@@ -1,0 +1,78 @@
+/*Design an  Employee class with properties EmployeeId, Name, Designation. Have an 
+encapsulated field called Salary. Expose method called GetSalary() which displays or 
+returns the current salary,  but setting of salary should be done at the time of hiring 
+(object creation time).  Have an encapsulated method called IncreasePay() , where the salary 
+can be increased by 10%. The user / client  should be exposed only to a method called Promote()
+a boolean value, which decides the Increase Pay of 10% or not.*/
+
+
+
+using System;
+
+namespace Exercise1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Employee empObj = new Employee(1,"vasu","Trainee");
+            Console.WriteLine("Enter true or false for promotion: ");
+            var empPromotion = Convert.ToBoolean(Console.ReadLine());
+            empObj.EmpSalary = 12345.00;
+            empObj.GetSalary(); 
+            empObj.Promote(empPromotion);
+            
+        }
+    }
+}
+
+using System;
+
+namespace Exercise1
+{
+    class Employee
+    {
+            public int empId;
+            public string empName;
+            public string empDesignation;
+            private double _empSalary;
+            private readonly double _empHike = 0.1;
+
+            //constructor
+            public Employee(int a,string b, string c)
+            {
+                this.empId = a;
+                this.empName = b; 
+                this.empDesignation = c;
+            }
+            public double EmpSalary { get => _empSalary; set => _empSalary = value; }
+        
+            //GetSalary
+            public void GetSalary()
+            {
+                Console.WriteLine(String.Format("ID: {0} - Name: {1} - Current Salary ${2}",empId,empName,_empSalary));
+            } 
+
+
+            //Promotion
+            public void Promote(bool x)
+            {
+                if (x)
+                {
+                    Console.WriteLine(String.Format("With promotion ID: {0} - Salary: ${1}",empId,(IncreasePay(_empSalary))));
+                } 
+                else
+                {
+                    Console.WriteLine("No promotion");
+                }
+            } 
+
+            public double IncreasePay(double _empSalary) 
+            {
+                var totalSalary = _empSalary + (_empSalary * _empHike); 
+                return totalSalary;
+            }
+
+    }
+
+}
