@@ -1,0 +1,63 @@
+/*Write a program which has a class of Student with Id, Name and Date of Birth.  You can 
+set the Date of birth at the time of Admission (object creation),  and have a property which 
+calculates the age.  (use property  get accessors ) and can be accessed from the client / main 
+program. Also ensure user cannot enter the Dob or Age at a later point of time in the program*/
+
+
+using System;
+
+namespace Exercise3
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Student stuobj = new Student(1,"vasu");
+            stuobj.studentDoB = new DateTime(2001,6,8);
+            Console.WriteLine(stuobj.CalculateAge(stuobj.studentDoB));
+        }
+    }
+}
+
+
+using System;
+
+namespace Exercise3
+{
+    class Student
+    { 
+
+        public int studentId;
+        public string studentName;
+        public DateTime studentDoB;
+        public Student(int a, string b)
+        {
+           this.studentId = a;
+           this.studentName = b;
+        } 
+
+        public DateTime Age 
+        { 
+            get
+            {
+                return studentDoB;
+            } 
+            set
+            {
+                studentDoB = value;
+            }
+        } 
+
+        public int CalculateAge(DateTime studentDoB)
+        {   
+            //this.studentDoB = s;  
+            var age = DateTime.Now.Year - studentDoB.Year; 
+            //TimeSpan difference = DateTime.Now.Year - studentDoB.Year;
+            return age;  
+
+        }
+
+    }   
+
+
+}
