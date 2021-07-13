@@ -1,0 +1,81 @@
+/*A program should have a class of Employees with property Id and Name .  Make use of indexers 
+to create a collection semantics.  Make use  of HashTable to store the list of items in a key 
+value pairs.*/
+
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+
+namespace Exercise2
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var myEmployees = new Hashtable();
+            Employee empobj1 = new Employee(1,"Derek Shepherd");
+            Employee empobj2 = new Employee(2,"Meredith Grey");
+            Employee empObj3 = new Employee(3,"Alex Karev");
+            
+            myEmployees.Add(empobj1.empId,empobj1);
+            myEmployees.Add(empobj2.empId,empobj2);
+            myEmployees.Add(empObj3.empId,empObj3);
+            
+            
+            foreach (DictionaryEntry entry in myEmployees)
+            {   
+                //Console.WriteLine("ID: {0} NAME: {1}", entry.Key, entry.Value);
+                Console.WriteLine("ID: {0} NAME: {1}", entry.Key, entry.Value.ToString());
+            }
+   
+        }
+    }
+} 
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+
+
+namespace Exercise2
+{
+    class Employee
+    {
+        
+        Hashtable myEmployees = new Hashtable();
+
+        public Employee(int id, string name)
+        {
+            this.empId = id;
+            this.empName = name;
+            
+        } 
+
+        public int empId{ get; set; }
+       
+        public string empName{ get; set; }
+
+
+      //Indexers
+        public Object this[int empId]
+        {
+          get { return myEmployees[empId]; }
+          set { myEmployees[empId] = value; }
+        }
+        
+        public Object this[string empName]
+        {
+          get { return myEmployees[empName]; }
+          set { myEmployees[empName] = value; }
+        } 
+
+        
+        public override String ToString()
+        {
+              return empName;
+        }
+        
+    }
+}
+
