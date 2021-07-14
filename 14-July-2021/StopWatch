@@ -1,0 +1,119 @@
+using System;
+
+namespace Exercise1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            StopWatch swObj = new StopWatch();
+            Console.WriteLine("------------------------------------STOP WATCH -----------------------------------------");
+            Console.WriteLine("Enter \"A\"- start timer, \"B\" - stop timer, \"C\" - display elapsed time, \"D\" - Program exited");
+            while (true)
+            {
+                ConsoleKeyInfo k = Console.ReadKey(false);
+
+                if (k.Key == ConsoleKey.D)
+                {
+                    Console.WriteLine("Progam exited");
+                    return;
+                }
+                else if (k.Key == ConsoleKey.A)
+                {
+                    swObj.Start();
+                }
+                else if (k.Key == ConsoleKey.B)
+                {
+                    swObj.Stop();
+                }
+                else if (k.Key == ConsoleKey.C)
+                {
+                    swObj.GetInterval();
+                }
+                else
+                {
+                    Console.WriteLine("Enter valid data");
+                }
+            }
+
+
+        }
+    }
+}
+
+
+using System;
+using System.Threading;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Exercise1
+{
+    class StopWatch
+    {
+ 
+        private DateTime _sTime1, _sTime2;
+        public bool isRunning;
+
+        public StopWatch()
+        {
+            _sTime1 = new DateTime();
+            _sTime2 = new DateTime();
+            isRunning = false;
+
+        }
+
+        public void Start()
+        {
+            try
+            {
+                if (!isRunning)
+                {
+                    _sTime1 = DateTime.Now;
+                    isRunning = true;
+                    //Console.WriteLine("\n{0:00}Hour : {1:00}Minute : {2:00}Second : {3:00}Millisecond", _sTime1.Hour, _sTime1.Minute, _sTime1.Second, _sTime1.Millisecond);
+                    Console.WriteLine("\nTimer starts...");
+                }
+            } 
+            catch
+            {
+                Console.WriteLine("\nException Occurred!!!");
+            }
+        }
+
+        public void Stop()
+        {
+            _sTime2 = DateTime.Now;
+            Thread.Sleep(2000);
+            //Console.WriteLine("\n{0:00}Hour : {1:00}Minute : {2:00}Second : {3:00}Millisecond", _sTime2.Hour, _sTime2.Minute, _sTime2.Second, _sTime2.Millisecond);
+            Console.WriteLine("\nTimer stops!!!");
+            isRunning = false;
+            sTime = new DateTime();
+
+        }
+        
+        public DateTime sTime
+        {
+            get
+            {
+                return _sTime2;
+            }
+            set
+            {
+                DateTime? sTime = null;
+            }
+
+        } 
+
+
+        public void GetInterval()
+        {
+            TimeSpan ts = _sTime2 - _sTime1;
+            string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",ts.Hours, ts.Minutes, ts.Seconds,ts.Milliseconds);
+            Console.WriteLine("\nElapsed Time " + elapsedTime);
+
+        }
+    }   
+}
