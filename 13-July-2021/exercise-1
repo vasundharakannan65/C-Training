@@ -15,10 +15,10 @@ namespace Exercise1
     {
         static void Main(string[] args)
         {
-            Employee empObj = new Employee(1,"vasu","Trainee");
+            Employee empObj = new Employee(1,"vasu","Trainee",12345.00);
             Console.WriteLine("Enter true or false for promotion: ");
             var empPromotion = Convert.ToBoolean(Console.ReadLine());
-            empObj.EmpSalary = 12345.00;
+            //empObj.EmpSalary = 12345.00;
             empObj.GetSalary(); 
             empObj.Promote(empPromotion);
             
@@ -36,14 +36,15 @@ namespace Exercise1
             public string empName;
             public string empDesignation;
             private double _empSalary;
-            private readonly double _empHike = 0.1;
+            private const double _empHike = 0.1;
 
             //constructor
-            public Employee(int a,string b, string c)
+            public Employee(int a,string b, string c,double d)
             {
                 this.empId = a;
                 this.empName = b; 
                 this.empDesignation = c;
+                this.empSalary = d;
             }
             public double EmpSalary { get => _empSalary; set => _empSalary = value; }
         
