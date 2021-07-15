@@ -1,0 +1,253 @@
+//Explore all the available access modifiers for both Properties and Methods, create a program to 
+//demonstrate the use of Protected, Internal, Private and Public
+
+//MAIN PROGRAM
+using System;
+using System.Reflection;
+
+namespace AccessModifiers
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {   
+            
+            Customer cusObj = new Customer();
+            cusObj.cusName = "Jon Snow";
+            cusObj.cusAddress = "Castle black";
+            cusObj.cusCredit = 4;
+
+            //Calling a public method 
+            cusObj.CreditRating(); 
+
+            //Calling a private method 
+            //var op = typeof(Customer).GetMethod("CustomerReviews", BindingFlags.NonPublic | BindingFlags.Instance)
+            //    .Invoke(new Customer(), null);
+            //Console.WriteLine(op);
+
+            //Making a class private - Not possible cannot be explicitly declared as private,
+            //protected,private protected, protected internal 
+
+            //Making a class public - possible 
+            CustomerExperience expObj = new CustomerExperience();
+            expObj.CustomerExpierenceMethod();
+
+            //protected Internal 
+            //creating a obj for derived class
+            ActiveCustomer actObj = new ActiveCustomer(126.98);
+            actObj.Reviews();
+
+           
+
+        }
+    }
+}
+
+//CUSTOMER CLASS
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace AccessModifiers
+{
+    class Customer
+    {   
+
+        //Using private property
+        private string _cusName { get ; set; }
+        private string _cusAddress { get; set; }
+
+        private int _cusCredit; 
+
+        //Get & Set 
+        public string cusName
+        {
+            get => _cusName;
+            set => _cusName = value;
+        }
+         
+        public string cusAddress
+        {
+            get => _cusAddress;
+            set => _cusAddress = value;
+        }
+        
+        public int cusCredit
+        {
+            get => _cusCredit;
+            set => _cusCredit = value;
+        }
+        public void CreditRating()
+        {
+            Console.WriteLine($"{cusName} from {cusAddress} has rated {cusCredit} - Using private prop & public method");
+        } 
+
+        private void CustomerReviews()
+        {
+            var result = (cusCredit > 3)? "Good" : "Not bad";
+            Console.WriteLine(result);
+            Console.WriteLine("Invoking a private method");
+        }
+    }
+}
+
+//CUSTOMER EXPIERENCE
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace AccessModifiers
+{
+    public class CustomerExperience
+    {   
+        public void CustomerExpierenceMethod()
+        {
+            Console.WriteLine("This is the customer expierence class - using public class & method ");
+        }
+        
+       
+    }
+}
+
+//ACTIVE CUSTOMER
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace AccessModifiers
+{
+    class ActiveCustomer : Customer
+    {
+
+        //protected internal property
+        protected internal double activeDiscounts { get; set; }
+
+        //Protected internal constructor
+        protected internal ActiveCustomer(double a)
+        {
+            this.activeDiscounts = a;
+        } 
+
+        //protected internal method 
+        protected internal void Reviews()
+        {
+            Console.WriteLine($"Accessing using Protected internal - {activeDiscounts}");
+        }
+
+    }
+}
+
+//ORDERS 
+using System;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+
+
+namespace Orders
+{       
+        //protected property & methods
+        class GetOrders
+        {
+            protected bool isPrepaid;
+            protected string orderID;
+            protected int price;
+
+            protected void Dispatch()
+            {
+                Console.WriteLine("protected method");
+            }
+        } 
+
+        class Program: GetOrders
+        {
+            static void Main(string[] args)
+            {
+   
+            Program pObj = new Program();//creating object for derived class
+            // Compiler Error
+            // These are inaccessible due to protected specifier
+            //But possible through derived class
+            pObj.isPrepaid = true;
+            pObj.orderID = "ASGH76";
+            pObj.price = 100;
+            pObj.Dispatch();
+
+            }
+        }
+    
+}
+
+//PROTECTED INTERNAL
+using System;
+using ProjectA;
+using ProjectB;
+
+namespace ProjectA
+{
+     class Program
+     {
+        static void Main(String[] args)
+        {
+            CorporateCustomer ccObj = new CorporateCustomer("Tyrion",1562872.78,9);
+            ccObj.GetCustomerDetails();
+        }
+     }
+
+
+    class CorporateCustomer
+    {
+            //internal property & methods
+            internal string contactName { get; set; }
+            internal double creditLimit { get; set; }
+            internal int creditRating { get; set; }
+
+            protected int price;
+
+        //using internal parameterised constructor
+        public CorporateCustomer(string a,double b,int c)
+        {
+            this.contactName = a;
+            this.creditLimit = b;
+            this.creditRating = c;
+            
+            
+        }
+            internal void GetCustomerDetails()
+            {
+                Console.WriteLine($"{contactName} with {creditLimit} has rated {creditRating}");
+                
+            } 
+        protected int AccountDetails()
+        {
+            return 1;
+        }
+
+    }
+    
+}
+
+namespace ProjectB
+{
+    public class CorporateCustomer2
+    {
+        public void CorporateCustomerMethod()
+        {
+            try
+            {
+                //Console.WriteLine(ProjectA.CorporateCustomer.AccountDetails);
+                //Console.WriteLine(ProjectA.CorporateCustomer.price);
+            }
+            catch
+            {
+                Console.WriteLine("Exception - protected");
+            }
+        }
+    }
+}
