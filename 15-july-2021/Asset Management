@@ -1,0 +1,216 @@
+//MAIN PROGRAM
+using System;
+using System.Collections;
+using System.Collections.Generic;
+
+namespace AssetsManagement
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+
+            //creating objects of derived classes
+            var computerObj = new Computer();
+            var dockstationObj = new DockStation();
+            var hdphObj = new Headphone();
+            //var laptopObj = new Laptop(myLaptopList);
+            var mouseObj = new Mouse();
+
+            computerObj.Configuration();
+            computerObj.Warranty();
+
+            //Adding some more laptops
+            //string[] LaptopList = {"HP", "Dell", "Lenovo"};
+            //List<string> myLaptopList = new List<string>(); 
+            //myLaptopList.AddRange(LaptopList);
+
+            var laptopObj = new Laptop();
+            //Console.WriteLine("No. of newly added assests: " + (laptopObj.AddAssets()));
+            
+
+        }
+    }
+}
+
+//ASSET CLASS 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace AssetsManagement
+{
+    abstract class Assets
+    {   
+
+        //Created abstract methods - only declaration
+        public abstract void Configuration();
+
+        public abstract void Warranty();
+
+        public abstract int AddAssets();
+    } 
+    
+    
+     
+}
+
+//COMPUTER CLASS
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace AssetsManagement
+{
+    class Computer : Assets
+    {   
+        public override void Configuration()
+        {
+            Console.WriteLine("Computer configuration details - Intel i5 8th Gen");
+        }
+        public override void Warranty()
+        {
+            Console.WriteLine("Warranty for computer - 2 years");
+        }
+
+        public override int AddAssets()
+        {
+            return 1;
+        }
+      
+
+
+    }
+}
+
+//DOCKSTATION
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace AssetsManagement
+{
+    class DockStation : Assets
+    {
+
+        
+        public override void Configuration()
+        {
+            Console.WriteLine("Dock station Configuration - New");
+        }
+
+        public override void Warranty()
+        {
+            Console.WriteLine("Warranty of dock station - 3 years");
+        }
+
+        public override int AddAssets()
+        {
+            return 1;
+        }
+
+       
+    }
+}
+
+//MOUSE
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace AssetsManagement
+{
+    class Mouse : Assets 
+    {
+        public override void Configuration()
+        {
+            Console.WriteLine("Configuration of Mouse - double click speed");
+        }
+
+        public override void Warranty()
+        {
+            Console.WriteLine("warranty for mouse - 6 months");
+        }
+
+        public override int AddAssets()
+        {
+            return 1;
+        }
+
+    }
+}
+
+//HEADPHONE
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace AssetsManagement
+{
+    class Headphone : Assets 
+    {
+        public override void Configuration()
+        {
+            Console.WriteLine("Configuration of headphone - Perfect EQ");
+        }
+
+        public override void Warranty()
+        {
+            Console.WriteLine("Warranty of headphone - 2 months");
+        }
+        public override int AddAssets()
+        {
+            return 1;
+        }
+
+    }
+}
+
+//LAPTOP
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace AssetsManagement
+{
+    class Laptop : Assets 
+    {
+        //public Laptop(List<string> list)
+        //{
+        //    this.myLaptopList = list;
+        //}
+        public override void Configuration()
+        {
+            Console.WriteLine("Configuration of laptop - Windows 11");
+        }
+
+        public override void Warranty()
+        {
+            Console.WriteLine("warranty for laptop - 1 year");
+        }
+
+        public override int AddAssets()
+        {
+            //int myCount = 0;
+            //foreach (string item in mylist)
+            //{
+            //    myCount++;
+            //}
+            //return myCount; 
+            return 1;
+        }
+
+    }
+}
