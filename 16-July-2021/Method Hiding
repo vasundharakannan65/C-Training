@@ -1,0 +1,98 @@
+//Main program
+using System;
+
+
+namespace MethodHiding
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            //Object creation for Base class 
+            BaseClass ObjA = new BaseClass();
+            Console.WriteLine("Accessing Base class with base object: ");
+            Console.WriteLine(ObjA.WriteNum());
+            Console.WriteLine(ObjA.WriteStr());
+
+            //Down casting 
+            //DerivedClass objB = new DerivedClass();
+            //Upcasting is possible but downcasting throwing an exception
+            try
+            {
+                DerivedClass newobjB = (DerivedClass)ObjA;
+            }
+            catch
+            {
+                Console.WriteLine("\nTypecast exception from baseclass to parentclass - Downcast method");
+            }
+            
+            Console.WriteLine("\nAccessing with upcasting method: ");
+            BaseClass objB = new DerivedClass();
+            Console.WriteLine(objB.WriteNum());
+            Console.WriteLine(objB.WriteStr());
+
+            //Derived class object creation
+            DerivedClass objC = new DerivedClass();
+            Console.WriteLine("\nAccessing with derived class object");
+            Console.WriteLine(objC.WriteNum());
+            Console.WriteLine(objC.WriteStr());
+
+
+
+            }
+    }
+}
+
+//Base class,Derived class
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MethodHiding
+{
+    class BaseClass
+    {   
+        public int WriteNum()
+        {
+            return 10;
+        } 
+
+        public virtual string WriteStr()
+        {
+            return "Base class";
+
+        }
+    } 
+
+    //Inherting the base class 
+    class DerivedClass : BaseClass
+    {
+        public new int WriteNum()
+        {
+            return 20;
+        } 
+
+        public override string WriteStr()
+        {
+            return "Derived class";
+        }
+    }
+} 
+
+
+//Output
+Accessing Base class with base object:
+10
+Base class
+
+Typecast exception from baseclass to parentclass - Downcast method
+
+Accessing with upcasting method:
+10
+Derived class
+
+Accessing with derived class object
+20
+Derived class
