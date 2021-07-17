@@ -1,4 +1,11 @@
 //Main program
+/*Create a Base Class with a method with the name WriteNum and display an integer.  Create another virtual method WriteStr and display some string.
+Create a Derived class and create a hidden method by name WriteNum and override the method WriteStr. 
+Create Objects -
+ -objectA  of type base class 
+- objectB of type  base class but downcasted to the derived class 
+- objectC of type derived class 
+Display the methods from all 3 objects*/
 using System;
 
 
