@@ -71,7 +71,7 @@ namespace Constructors
         }
         public virtual void Display()
         {
-            Console.WriteLine($"Account Id {_accountId} of {_accountName} has a balance of {_accountBalance}");
+            Console.WriteLine($"Account Id {_accountId} of {_accountName} has a balance of ${_accountBalance}");
         }
     } 
 
@@ -99,7 +99,7 @@ namespace Constructors
 
         public override void Display()
         {
-            Console.WriteLine($"Pan Number {PanNumber} is linked with the account {AccountId} Of {AccountName} has balance of {AccountBalance}");
+            Console.WriteLine($"Pan Number {PanNumber} is linked with the account {AccountId} Of {AccountName} has balance of ${AccountBalance}");
         }
 
 
@@ -107,5 +107,5 @@ namespace Constructors
 }
 
 //Output 
-Account Id 513825378 of Vasundhara has a balance of 572682.99
-Pan Number ASERB6789Q is linked with the account 513825378 Of Vasundhara has balance of 572682.99
+Account Id 513825378 of Vasundhara has a balance of $572682.99
+Pan Number ASERB6789Q is linked with the account 513825378 Of Vasundhara has balance of $572682.99
