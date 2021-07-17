@@ -1,0 +1,111 @@
+//Main program 
+//Create a base class SalaryAccount , when creating the account you must pass the fields like account Id, Name, Balance
+//Create a derived class DematAccount, when creating a demat account you must and should pass the Pan Card number. 
+//Try using the Regular expressions which you learnt in self learning to validate the pan card number  format. 
+//User should be able to create 
+//- SalaryAccount alone
+//-  Salary Account along with the DematAccount 
+
+
+
+using System;
+using System.Text.RegularExpressions;
+
+namespace Constructors
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {   
+            //Base class
+            SalaryAccount objSalary = new SalaryAccount(513825378, "Vasundhara", 572682.99);
+            objSalary.Display();
+
+            //Derived class 
+            DematAccount objDemat = new DematAccount("ASERB6789Q", 513825378, "Vasundhara", 572682.99);
+            objDemat.Display();
+
+        }
+    }
+}
+
+
+//Base class,Derived class 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Text.RegularExpressions;
+
+namespace Constructors
+{
+    class SalaryAccount
+    {
+        private int _accountId;
+        private string _accountName;
+        private double _accountBalance;
+        public SalaryAccount(int accountId, string accountName, double accountBalance)
+        {
+            this._accountId = accountId;
+            this._accountName = accountName;
+            this._accountBalance = accountBalance;
+        } 
+
+        public int AccountId
+        {
+            get => _accountId;
+            set => _accountId = value;
+        }
+
+        public string AccountName
+        {
+            get => _accountName;
+            set => _accountName = value;
+        }
+
+        public double AccountBalance
+        {
+            get => _accountBalance;
+            set => _accountBalance = value;
+        }
+        public virtual void Display()
+        {
+            Console.WriteLine($"Account Id {_accountId} of {_accountName} has a balance of {_accountBalance}");
+        }
+    } 
+
+    class DematAccount : SalaryAccount
+    {
+        private string _panNumber;
+        public DematAccount(string panNumber,int accountId,string accountName,double accountBalance) : base(accountId,accountName,accountBalance)
+        {
+            this._panNumber = panNumber;
+        }
+
+        //Checking whether the panNumber is valid or not 
+        public string PanNumber
+        {
+            get => _panNumber;
+            set
+            {
+                string pattern = "[A-Z]{3}[ABCFGHLJPTF]{1}[A-Z]{1}[0-9]{4}[A-Z]{1}";
+                Regex re = new Regex(pattern);
+                if (re.IsMatch(_panNumber))
+                    _panNumber = value;
+            }
+
+        }
+
+        public override void Display()
+        {
+            Console.WriteLine($"Pan Number {PanNumber} is linked with the account {AccountId} Of {AccountName} has balance of {AccountBalance}");
+        }
+
+
+    }
+}
+
+//Output 
+Account Id 513825378 of Vasundhara has a balance of 572682.99
+Pan Number ASERB6789Q is linked with the account 513825378 Of Vasundhara has balance of 572682.99
