@@ -1,0 +1,189 @@
+//Main program 
+//Create a class called Insurance, Add some methods like Pay premium.  Have few properties like name, email,
+//Premium Due Date, aadhar card number.  Before creating an object, validate all inputs using the c# regular expressions.
+//Create an extension method called GetDueDays which accepts the Insurance object  and returns the number of days pending
+//to pay premium or number of days exceeded.
+
+using System;
+using System.Text.RegularExpressions;
+
+namespace ExtensionMethod
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {   
+            
+            //Getting all inputs
+            Console.WriteLine("Enter the name: ");
+            var myName = Console.ReadLine();
+            Console.WriteLine("Enter the mail id: ");
+            var myMailId = Console.ReadLine();
+            Console.WriteLine("Enter the due date: ");
+            DateTime myDueDate = Convert.ToDateTime(Console.ReadLine());
+            Console.WriteLine("Enter the aadhaar number for validation: ");
+            long myAadhaarNumber = Convert.ToInt64(Console.ReadLine());
+
+            var res =  (Validation.IsValidName(myName) == true && Validation.IsValidMailId(myMailId) == true &&
+            Validation.IsValidDueDate(myDueDate) == true && Validation.IsValidAadhaarNumber(myAadhaarNumber) == true)? "true" : "false";
+
+            if(res == "false")
+                Console.WriteLine("Please enter the valid inputs;");
+            else
+            {
+                Insurance insuranceObj = new Insurance
+                {
+                    name = myName,
+                    email = myMailId,
+                    dueDate = myDueDate,
+                    AadhaarNumber = myAadhaarNumber
+
+                };
+                insuranceObj.PayPremium();
+                insuranceObj.GetDueDays();
+            }
+            
+        }
+    }
+
+}
+
+//Insurance class
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ExtensionMethod
+{
+    class Insurance
+    {
+        //name, email, Premium Due Date, aadhar card number 
+        public string name;
+        public string email;
+        public DateTime dueDate;
+        private long _aadhaarNumber; 
+
+        public long AadhaarNumber
+        {
+            get => _aadhaarNumber;
+            set => _aadhaarNumber = value;
+        }
+        public void PayPremium() 
+        {
+            Console.WriteLine("Only through online payment");
+        } 
+
+
+    } 
+
+    static class DueDays
+    {
+        public static void GetDueDays(this Insurance insuranceObj)
+        {
+            DateTime date = DateTime.Now;
+            TimeSpan difference = date - insuranceObj.dueDate;
+
+            if (difference.Days < 0)
+                Console.WriteLine("{0} days pending to pay the premium", Math.Abs(difference.Days)); 
+            else
+                Console.WriteLine($"{difference.Days} days have exceeded the due date");
+        }
+    }
+
+
+}
+
+//Validation class 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Text.RegularExpressions;
+
+namespace ExtensionMethod
+{
+    static class Validation
+    {
+            public static bool IsValidName(string name)
+            {
+                string pattern = "^[a-zA-Z]+[a-zA-Z]*$";
+                Regex re = new Regex(pattern, RegexOptions.IgnoreCase);
+                if (re.IsMatch(name))
+                    return true;
+                else
+                    return false;
+            }
+
+            public static bool IsValidMailId(string mailid)
+            {
+                string pattern = "^((\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*)\\s*[;]{0,1}\\s*)+$";
+                Regex re = new Regex(pattern, RegexOptions.IgnoreCase);
+                if (re.IsMatch(mailid))
+                    return true;
+                else
+                    return false;
+            }
+
+            public static bool IsValidDueDate(DateTime duedate)
+            {
+                //string pattern = "((([0-9][0-9][0-9][1-9])|([1-9][0-9][0-9][0-9])|([0-9][1-9][0-9][0-9])|([0-9][0-9][1-9][0-9]))-((0[13578])|(1[02]))-((0[1-9])|([12][0-9])|(3[01])))|((([0-9][0-9][0-9][1-9])|([1-9][0-9][0-9][0-9])|([0-9][1-9][0-9][0-9])|([0-9][0-9][1-9][0-9]))-((0[469])|11)-((0[1-9])|([12][0-9])|(30)))|(((000[48])|([0-9]0-9)|([0-9][1-9][02468][048])|([1-9][0-9][02468][048]))-02-((0[1-9])|([12][0-9])))|((([0-9][0-9][0-9][1-9])|([1-9][0-9][0-9][0-9])|([0-9][1-9][0-9][0-9])|([0-9][0-9][1-9][0-9]))-02-((0[1-9])|([1][0-9])|([2][0-8])))";
+                //Regex re = new Regex(pattern);
+                //if (re.IsMatch(duedate.ToString()))
+                return true;
+                //
+
+
+            }
+
+            public static bool IsValidAadhaarNumber(long aadhaarnumber)
+            {
+                string pattern = "[0-9]{12}";
+                Regex re = new Regex(pattern);
+                if (re.IsMatch(aadhaarnumber.ToString()))
+                    return true;
+                else
+                    return false;
+            } 
+
+    }
+    
+}
+
+//Output 
+test case 1:
+Enter the name:
+vasu
+Enter the mail id:
+vasu23@hm.com
+Enter the due date:
+07/22/2021
+Enter the aadhaar number for validation:
+123456781234
+Only through online payment
+3 days pending to pay the premium 
+
+test case 2: 
+Enter the name:
+xxx
+Enter the mail id:
+xxx@mm.com
+Enter the due date:
+07/16/2021
+Enter the aadhaar number for validation:
+787856562323
+Only through online payment
+2 days have exceeded the due date 
+
+test case 3:
+Enter the name:
+56
+Enter the mail id:
+ct%.com
+Enter the due date:
+09/13/2020
+Enter the aadhaar number for validation:
+16716716716
+Please enter the valid inputs;
