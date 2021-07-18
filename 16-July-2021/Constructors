@@ -71,7 +71,7 @@ namespace Constructors
         }
         public virtual void Display()
         {
-            Console.WriteLine($"Account Id {_accountId} of {_accountName} has a balance of ${_accountBalance}");
+            Console.WriteLine($"{_accountId} of {_accountName} has a balance of {_accountBalance}");
         }
     } 
 
@@ -87,25 +87,38 @@ namespace Constructors
         public string PanNumber
         {
             get => _panNumber;
-            set
-            {
-                string pattern = "[A-Z]{3}[ABCFGHLJPTF]{1}[A-Z]{1}[0-9]{4}[A-Z]{1}";
-                Regex re = new Regex(pattern);
-                if (re.IsMatch(_panNumber))
-                    _panNumber = value;
-            }
+            set => _panNumber = value;
+        } 
 
+        public bool IsValidPanNumber(string panNumber)
+        {
+            this.PanNumber = panNumber;
+            string pattern = "^[A-Z]{3}[ABCFGHLJPTF]{1}[A-Z]{1}[0-9]{4}[A-Z]{1}";
+            Regex re = new Regex(pattern, RegexOptions.IgnoreCase);
+            if (re.IsMatch(PanNumber))
+                return true;
+            else
+                return false;
         }
 
         public override void Display()
         {
-            Console.WriteLine($"Pan Number {PanNumber} is linked with the account {AccountId} Of {AccountName} has balance of ${AccountBalance}");
+            if (IsValidPanNumber(PanNumber))
+                Console.WriteLine("{0} is linked with the account Number {1} Of {2}", PanNumber, AccountId, AccountName);
+            else
+                Console.WriteLine("Invalid Pan number Please enter the correct number;");
         }
-
 
     }
 }
 
+
 //Output 
 Account Id 513825378 of Vasundhara has a balance of $572682.99
-Pan Number ASERB6789Q is linked with the account 513825378 Of Vasundhara has balance of $572682.99
+Pan Number ASERB6789Q is linked with the account 513825378 Of Vasundhara has balance of $572682.99 
+
+513825378 of Vasundhara has a balance of $572682.99
+zzzaA0000A is linked with the account Number 513825378 Of Vasundhara 
+
+513825378 of Vasundhara has a balance of $572682.99
+Invalid Pan number Please enter the correct number;
