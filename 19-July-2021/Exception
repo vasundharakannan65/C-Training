@@ -1,0 +1,46 @@
+//Presentation- Main program 
+using System;
+using System.Text;
+using Domain;
+
+namespace Presentation
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            StringBuilder sbFullText = new StringBuilder("This is my sample text occurance");
+
+            string subText = "Sample text";
+
+            DomainClass objDomain = new DomainClass();
+            try
+            {
+                Console.WriteLine(objDomain.ToFindSubString(sbFullText.ToString(),subText));
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message+""+e.StackTrace);
+            }
+        }
+    }
+}
+
+//Domain - Class library 
+using System;
+using System.Text;
+namespace Domain
+{
+    public class DomainClass
+    {
+        public string ToFindSubString(string fulltext,string subtext)
+        {
+            //string fullText = fulltext.ToString();
+            if (fulltext.Contains(subtext))
+                return"The given sub string is given in the text";
+            else
+                throw new Exception("Sub string not found");
+
+        }
+    }
+}
