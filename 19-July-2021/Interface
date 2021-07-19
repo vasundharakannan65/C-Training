@@ -1,0 +1,189 @@
+//Main program 
+using System;
+using System.Text.RegularExpressions;
+
+namespace Constructors
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {   
+            //Base class
+            SalaryAccount objSalary = new SalaryAccount(513825378, "Vasundhara", 572682.99);
+            //objSalary.Display();
+            objSalary.AvailFreeDemandDraft();
+            objSalary.AvailFreeLocker();
+
+            //Derived class 
+            DematAccount objDemat = new DematAccount("zzza10000A", 513825378, "Vasundhara", 572682.99);
+            //objDemat.Display();
+            objDemat.AvailFreeCreditScoreCheck();
+            objDemat.GetDailyStockUpdates();
+       
+            
+
+        }
+    }
+}
+
+//salaryaccount & demat account 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Text.RegularExpressions;
+
+namespace Constructors
+{
+    class SalaryAccount : IBenefits
+    {
+        private int _accountId;
+        private string _accountName;
+        private double _accountBalance;
+        public SalaryAccount(int accountId, string accountName, double accountBalance)
+        {
+            this._accountId = accountId;
+            this._accountName = accountName;
+            this._accountBalance = accountBalance;
+        } 
+
+        public int AccountId
+        {
+            get => _accountId;
+            set => _accountId = value;
+        }
+
+        public string AccountName
+        {
+            get => _accountName;
+            set => _accountName = value;
+        }
+
+        public double AccountBalance
+        {
+            get => _accountBalance;
+            set => _accountBalance = value;
+        }
+        public virtual void Display()
+        {
+            Console.WriteLine($"{_accountId} of {_accountName} has a balance of ${_accountBalance}");
+        } 
+
+        public void AvailFreeDemandDraft()
+        {   
+            if(_accountBalance > 50000)
+                Console.WriteLine($"DD is available");
+        } 
+        public void AvailFreeLocker()
+        {   
+            if(AccountId != 0)
+                Console.WriteLine("Locker is avail");
+        }
+        
+    } 
+
+    class DematAccount : SalaryAccount,IDematBenefits
+    {
+        private string _panNumber;
+        public int creditScore = 350;
+        public DematAccount(string panNumber,int accountId,string accountName,double accountBalance) : base(accountId,accountName,accountBalance)
+        {
+            this._panNumber = panNumber;
+        }
+
+        //Checking whether the panNumber is valid or not 
+        public string PanNumber
+        {
+            get => _panNumber;
+            set => _panNumber = value;
+        } 
+
+
+        public override void Display()
+        {
+            if (Validation.IsValidPanNumber(PanNumber))
+                Console.WriteLine("{0} is linked with the account Number {1} Of {2}", PanNumber, AccountId, AccountName);
+            else
+                Console.WriteLine("Invalid Pan number Please enter the correct number;");
+        }
+
+        public void AvailFreeCreditScoreCheck()
+        {
+            if (creditScore > 300)
+                Console.WriteLine("Eligible for bank loans");
+        }
+        public void GetDailyStockUpdates()
+        {
+            Console.WriteLine("Stock updates");
+        }
+
+        public new void AvailFreeDemandDraft()
+        {
+            if (AccountBalance > 50000)
+                Console.WriteLine($"DD is available");
+        }
+        public new void AvailFreeLocker()
+        {
+            if (AccountId != 0)
+                Console.WriteLine("Locker is avail");
+        }
+    }
+}
+
+//Validation of pan number
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Text.RegularExpressions;
+
+namespace Constructors
+{
+    static class Validation
+    {
+        public static bool IsValidPanNumber(string panNumber)
+        {
+            string pattern = "^[A-Z]{3}[ABCFGHLJPTF]{1}[A-Z]{1}[0-9]{4}[A-Z]{1}";
+            Regex re = new Regex(pattern, RegexOptions.IgnoreCase);
+            if (re.IsMatch(panNumber))
+                return true;
+            else
+                return false;
+        }
+    }
+}
+
+//Ibenefits interface
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Constructors
+{
+    interface IBenefits
+    {
+        void AvailFreeDemandDraft();
+        void AvailFreeLocker();
+    }
+}
+
+//Idematbenefits
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Constructors
+{
+    interface IDematBenefits : IBenefits
+    {
+        void AvailFreeCreditScoreCheck();
+        void GetDailyStockUpdates();
+
+    }
+}
