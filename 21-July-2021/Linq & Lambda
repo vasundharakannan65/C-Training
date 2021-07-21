@@ -1,0 +1,166 @@
+//Create two lists of Bank branches and Bank Managers with relevant properties  and perform the following operations
+//1. display the branches and respective managers
+//2. Display list of managers who are aged above 30  along with the branch name  
+//3. Display the manager who has earned maximum points (create a property called maxpoint in branches)
+//It will be great if both LINQ operator and LINQ expressions (lambda) are tried out. 
+
+
+
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Linq
+{
+    class Program
+    {
+
+        static void Main(string[] args)
+        {
+            List<BankBranches> branchList = new List<BankBranches>();
+            List<BankManagers> managerList = new List<BankManagers>();
+
+            BankBranches branchObj = new BankBranches();
+            branchList.Add(new BankBranches { branchId = 1, branchName = "Citi Union Bank",maxPoint = 30 });
+            branchList.Add(new BankBranches { branchId = 2, branchName = "State Bank", maxPoint = 67 });
+            branchList.Add(new BankBranches { branchId = 3, branchName = "ICICI Bank", maxPoint = 60});
+            branchList.Add(new BankBranches { branchId = 4, branchName = "HDFC Bank", maxPoint = 88});
+
+            BankManagers managerObj = new BankManagers();
+            managerList.Add(new BankManagers { managerId = 1, managerName = "Rick", managerAge = 45,managerBranch = "HDFC Bank" });
+            managerList.Add(new BankManagers { managerId = 2, managerName = "Morty", managerAge = 25, managerBranch = "ICICI Bank" });
+            managerList.Add(new BankManagers { managerId = 3, managerName = "Summer", managerAge = 36, managerBranch = "HDFC Bank" });
+            managerList.Add(new BankManagers { managerId = 4, managerName = "Planetina", managerAge = 39, managerBranch = "Citi Union Bank" });
+
+
+
+            //display the branches and respective managers using LAMBDA
+            var displayManagersWithambda = branchList.Join(managerList,
+                branch => branch.branchName,
+                manager => manager.managerBranch,
+                (branch, manager) => new
+                {
+                    ManagerName = manager.managerName,
+                    BranchName = branch.branchName
+                });
+            foreach (var item in displayManagersWithambda)
+            {
+                Console.WriteLine($"{ item.BranchName } - { item.ManagerName }");
+            }
+
+            //display the branches and respective managers LINQ
+            var displayManagers = from b in branchList
+                                  join m in managerList
+                                  on b.branchName equals m.managerBranch
+                                  select new
+                                  {
+                                      ManagerName = m.managerName,
+                                      BranchName = b.branchName
+                                  };
+
+
+            foreach (var item in displayManagers)
+            {
+                Console.WriteLine($"{ item.BranchName } - { item.ManagerName }");
+            }
+            
+            
+            
+            //Display list of managers who are aged above 30  along with the branch name LINQ
+            var displayManagerAge = from m in managerList
+                                    where m.managerAge > 30
+                                    select new
+                                    {
+                                        ManagerAge = m.managerAge,
+                                        ManagerBranch = m.managerBranch
+                                    };
+
+            foreach (var item in displayManagerAge)
+            {
+                Console.WriteLine($"{item.ManagerAge} - {item.ManagerBranch}");
+            }
+            
+            //Display list of managers who are aged above 30  along with the branch name with LAMBDA
+
+            var displayManagerAgeWithLambda = managerList.FindAll(manager => manager.managerAge > 30);
+
+            foreach (var item in displayManagerAgeWithLambda)
+            {
+                Console.WriteLine($"{item.managerAge} {item.managerBranch}");
+            }  
+            
+            
+            
+            //Display the manager who has earned maximum points LINQ
+            var maxValue = branchList.Max(x => x.maxPoint);
+
+            var displayManagerMaxPoint = (from b in branchList
+                                          join m in managerList
+                                          on b.branchName equals m.managerBranch
+                                          where b.maxPoint == maxValue
+                                          select new
+                                          {
+                                              ManagerName = m.managerName
+                                          });
+
+            foreach (var item in displayManagerMaxPoint)
+            {
+                Console.WriteLine($"{item}");
+            } 
+            
+            //Display the manager who has earned maximum points with lambda  LAMBDA
+            var displayManagersWithambda = branchList.Join(managerList,
+                branch => branch.branchName,
+                manager => manager.managerBranch,
+                (branch, manager) => new
+                {
+                    ManagerName = manager.managerName,
+                    BranchName = branch.branchName,
+                    MaxPoint = branch.maxPoint
+                }).Max(bm => bm.MaxPoint);
+            Console.WriteLine(displayManagersWithambda);
+        }
+    }
+}
+
+//Managers
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Linq
+{
+    class BankManagers
+    {
+        public int managerId { get; set; }
+        public string managerName { get; set; }
+        public int managerAge { get; set; }
+        public string managerBranch { get; set; }
+    }
+}
+
+//Branches
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Linq
+{
+    class BankBranches
+    {
+        private int v1;
+        private string v2;
+        private int v3;
+
+        public int branchId { get; set; } 
+        public string branchName { get; set; }
+        public int maxPoint { get; set; }
+
+    }
+}
