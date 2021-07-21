@@ -1,0 +1,106 @@
+//Create your own  Dictionary which takes key , value pairs of type Generics. Support methods like  
+//Add, Remove and Sort.
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+
+namespace Generics
+{
+    class Program
+    {
+        public static void Main(string[] args)
+        {
+
+            DGeneric<int, string> dGeneric = new DGeneric<int, string>();
+
+            Console.WriteLine("After Adding:");
+            dGeneric.Add(2, "Apple");
+            dGeneric.Add(1, "orange");
+            dGeneric.Add(3, "mango");
+            dGeneric.Add(5, "papaya");
+            dGeneric.Add(4, "kiwi"); 
+            dGeneric.Display();
+
+            Console.WriteLine("\nAfter removing a key:");
+            dGeneric.Remove(3);
+            dGeneric.Display();
+
+            Console.WriteLine("\nAfter sorting:");
+            dGeneric.Sort();
+            
+        }
+    }
+} 
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Generics
+{
+    class Employee
+    {
+        public int empId { get; set; }
+        public string empName { get; set; }
+    }
+}
+ 
+ using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Generics
+{
+    class DGeneric<T1,T2>
+    {
+        Dictionary<T1, T2> dictObj = new Dictionary<T1, T2>();
+        public void Add(T1 key, T2 value)
+        {
+            dictObj.Add(key, value);
+        }
+        public void Remove(T1 key)
+        {
+            dictObj.Remove(key);
+        }
+        public void Sort()
+        {
+            foreach (var item in dictObj.OrderBy(x => x.Key))
+            {
+                Console.WriteLine($"{item.Key} {item.Value}");
+            }
+        }
+
+        public void Display()
+        {
+            foreach(var item in dictObj)
+            {
+                Console.WriteLine($"{item.Key} {item.Value}");
+            }
+        }
+    }
+} 
+
+//output
+After Adding:
+2 Apple
+1 orange
+3 mango
+5 papaya
+4 kiwi
+
+After removing a key:
+2 Apple
+1 orange
+5 papaya
+4 kiwi
+
+After sorting:
+1 orange
+2 Apple
+4 kiwi
+5 papaya
