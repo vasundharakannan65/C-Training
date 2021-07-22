@@ -1,0 +1,39 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+
+
+namespace ActionDelegate
+{
+    class Program
+    {
+        public delegate void myDelegate(int z, int x);
+        public delegate void myDelegate1(int z);
+        static void Main(string[] args)
+        {   
+            //assignment
+            myDelegate obj = Add;
+            obj.Invoke(500, 500);
+
+            //anonymous
+            myDelegate obj1 = delegate(int z,int c)
+            {
+                Console.WriteLine(z+c);
+            };
+            obj(10, 2);
+
+            //with action keyword
+            Action<int, int> actionObj = Add;
+            actionObj(10, 30);
+
+            //lambda
+            Action<int> actionObj1 = z => Console.WriteLine(z+z);
+            actionObj1(100);
+        }  
+        
+        static void Add(int z, int x)
+        {
+            Console.WriteLine(z+x);
+        }
+    }
+}
