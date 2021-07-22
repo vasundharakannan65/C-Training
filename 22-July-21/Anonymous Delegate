@@ -1,0 +1,35 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+
+
+namespace AnonymousDelegate
+{
+    class Program
+    {
+        public delegate void myDelegatePrint(string m);
+
+        public delegate int myHandler(int z);
+        
+        static void Main(string[] args)
+        {
+            //anonymous delegate
+            string msg = "hi all";
+            myDelegatePrint obj = delegate (string m)
+            {
+                Console.WriteLine(m);
+            };
+            obj(msg);
+            
+            
+            //lambda exp
+            myHandler myHandlerobj = (int z) =>
+            {
+                return z;
+            };
+
+
+        }  
+        
+    }
+}
