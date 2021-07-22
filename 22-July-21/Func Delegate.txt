@@ -1,0 +1,9 @@
+Func delegate:
+It has zero or more input parameters and one out parameter. The last parameter is considered as an out parameter.
+
+[accessmodifier] delegate [name] Func<in T, out name>(T args);
+
+The last parameter in the angle brackets <> is considered the return type, and the remaining parameters 
+are considered input parameter types
+type must return a value.
+can have zero to 16 input parameters.
