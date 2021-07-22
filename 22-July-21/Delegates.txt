@@ -1,0 +1,20 @@
+Delegate is a reference type data type and you can define variables of delegate, just like other data type, 
+that can refer to any method with the same signature as the delegate
+
+Steps for delegate:- 
+1. Declare a delegate 
+[access_modifier] delegate [return_type] [delegate_name](params); 
+
+2.Create an obj of delegate 
+[delegate_name] obj = new [delegate_name](method);
+or 
+[delegate_name] obj = method; 
+or 
+[delegate_name] obj = (param) => stmt; 
+
+3.Invoke delegate 
+delobj.Invoke();
+or
+del();
+
+
