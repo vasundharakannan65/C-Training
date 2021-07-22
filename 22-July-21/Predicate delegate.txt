@@ -1,0 +1,12 @@
+Predicate<T> delegate:
+
+method containing a set of criteria and checks whether the passed parameter meets those criteria. 
+A predicate delegate methods must take one input parameter and return a boolean - true or false.
+
+[access modifier] delegate bool Predicate<in T>(T obj);
+
+for predicate to create instance we use:
+Predicate<T> obj = method; 
+
+
+*Predicate delegate takes one input parameter and boolean return type
