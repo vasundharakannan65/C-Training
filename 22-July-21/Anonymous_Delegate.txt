@@ -1,0 +1,7 @@
+Anonymous delegate/Inline delegate
+
+method which doesn’t contain any name.It is useful when the user wants to create an inline method 
+and also wants to pass parameter in the anonymous method like other methods
+
+=>This method can access variable present in the outer method. Such type of variables is known as Outer variables
+=>You can pass this method to another method which accepts delegate as a parameter
