@@ -1,0 +1,76 @@
+using System;
+
+namespace Delegates
+{
+    //1. declaring a delegate
+    public delegate void myDelegate(string a);
+    public delegate void myDelegateJoin(string a, string b);
+    
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Enter the string :");
+            string myStr = Console.ReadLine();
+            string myOtherStr = Console.ReadLine();
+            
+            //Multicasting with delegates
+            myDelegate delObj = new myDelegate(StringManipulation.StringReplace); //2.Create obj for delegate
+            delObj += StringManipulation.StringReverse;
+            delObj += StringManipulation.CharacterOccurence;
+            delObj.Invoke(myStr); //3.invoke delegate
+
+            myDelegateJoin delJoinObj = new myDelegateJoin(StringManipulation.StringJoin);
+            delJoinObj.Invoke(myStr, myOtherStr);
+        }
+    } 
+
+    class StringManipulation
+    {
+        public static void StringReplace(string s)
+        {
+            var replaceString = s.Replace(" ", "_");
+            Console.WriteLine($"The replaced string: {replaceString}");
+        } 
+
+        public static void StringReverse(string s)
+        {
+            var emptyString = " ";
+            for(int i = 1; i <= s.Length; i++)
+            {
+                emptyString += s[s.Length - i];
+            }
+            Console.WriteLine($"The reversed string: {emptyString}");
+        } 
+
+        public static void StringJoin(string s1,string s2)
+        {
+            var stringJoin = String.Concat(s1, s2);
+            Console.WriteLine($"After the string join: {stringJoin}");
+        } 
+
+        public static void CharacterOccurence(string s)
+        {
+            
+            int max = 0;
+            char myResult = ' ';
+            foreach (char c in s)
+            {
+                int myCount = 0;
+                foreach (char ch in s)
+                {
+                    if (c == ch)
+                        myCount++;
+                }
+                if (max < myCount)
+                {
+                    max = myCount;
+                    myResult = c;
+                }
+            }
+
+            Console.WriteLine($"The maximum character in string : {myResult} with frequency {max}");
+        }
+    }
+
+}
