@@ -1,0 +1,9 @@
+Action Delegate:
+An Action type delegate is the same as Func delegate except that the Action delegate doesn't return a value. 
+an Action delegate can be used with a method that has a void return type 
+
+Action delegate can have 0 to 16 input parameters. 
+
+Action<> delegatename = new Action<>(method); 
+or
+Action<> delegatename = method;
