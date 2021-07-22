@@ -1,0 +1,43 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+
+
+namespace PredicateDelegate
+{
+    class Program
+    {
+        
+
+        public delegate bool myHandler(string z);
+
+        public delegate bool myHandler2(int z);
+
+        static void Main(string[] args)
+        {
+            string msg = "hello";
+            Predicate<string> obj = Check;
+            Console.WriteLine(obj(msg));
+
+            //Anonymous
+            Predicate<int> obj1 = delegate(int a)
+            {
+                if (a > 10)
+                    return true;
+                return false;
+            };
+            Console.WriteLine(obj1.Invoke(13));
+
+            //Lambda
+            Predicate<string> obj2 = s => s.StartsWith('s');
+            Console.WriteLine(obj2(msg));
+        }  
+        static bool Check(string m)
+        {
+            if (m.Length == 10)
+                return true;
+            return false;
+                
+        }
+    }
+}
