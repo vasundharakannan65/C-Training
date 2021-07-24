@@ -1,0 +1,110 @@
+using System;
+
+namespace Events
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+
+            Console.WriteLine("Enter a text: ");
+            var s1 = Console.ReadLine();
+            var s2 = Console.ReadLine();
+         
+            Strings stringsObj1 = new Strings(s1);
+            stringsObj1.StringEvent += StringReplace;
+            stringsObj1.StringEvent += StringReverse;
+            stringsObj1.StringEvent += CharacterOccurence;
+
+            stringsObj1.StartProcess();
+
+
+            Strings stringsObj2 = new Strings(s1, s2);
+            stringsObj2.StringJoinEvent += StringJoin;
+
+            stringsObj2.StartProcess();
+
+        }
+
+        public static void StringReplace(string s)
+        {
+
+            var replaceString = s.Replace(" ", "_");
+            Console.WriteLine($"The replaced string: {replaceString}");
+
+        }
+
+        public static void StringReverse(string s)
+        {
+            var emptyString = " ";
+            for (int i = 1; i <= s.Length; i++)
+            {
+                emptyString += s[s.Length - i];
+            }
+            Console.WriteLine($"The reversed string: {emptyString}");
+        }
+
+        public static void StringJoin(string s1, string s2)
+        {
+            var stringJoin = String.Concat(s1, s2);
+            Console.WriteLine($"After the string join: {stringJoin}");
+        }
+
+        public static void CharacterOccurence(string s)
+        {
+
+            int max = 0;
+            char myResult = ' ';
+            foreach (char c in s)
+            {
+                int myCount = 0;
+                foreach (char ch in s)
+                {
+                    if (c == ch)
+                        myCount++;
+                }
+                if (max < myCount)
+                {
+                    max = myCount;
+                    myResult = c;
+                }
+            }
+
+            Console.WriteLine($"The maximum character in string : {myResult} with frequency {max}");
+        }
+    }
+    
+
+    class Strings
+    {
+
+        public delegate void MyEventHandler(string a);
+        public delegate void MyEventHandlerJoin(string a, string b); 
+
+        public event MyEventHandler StringEvent;
+        public event MyEventHandlerJoin StringJoinEvent;
+
+        string myStr, myOtherStr;
+        public Strings(string a)
+        {
+            this.myStr = a;
+        }
+
+        public Strings(string a,string b)
+        {
+            this.myStr = a;
+            this.myOtherStr = b; 
+        }
+
+        public void StartProcess()
+        {
+            OnStringEvent();
+        } 
+
+        public void OnStringEvent()
+        {
+            StringEvent?.Invoke(myStr);
+            StringJoinEvent?.Invoke(myStr, myOtherStr);
+        }
+    }
+}
