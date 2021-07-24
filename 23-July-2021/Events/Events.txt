@@ -1,0 +1,21 @@
+Events:
+
+events encapsulates delegates 
+we need delegate to fire automatically so we use events 
+delegate enable sub - pub pattern where del obj is PUBLISHER target methods is SUBSCRIBER 
+all the classes subcribed to event are notified at once 
+Name the method which raises an event prefixed with "On" with the event name
+Use built-in delegate EventHandler or EventHandler<TEventArgs> for common events
+Events can be declared static, virtual, sealed, and abstract 
+Event handlers are invoked synchronously if there are multiple subscribers
+Register with an event using the += operator 
+Unsubscribe it using the -= operator 
+Cannot use the = operator
+
+Two steps to declare an event: 
+
+1. declare a delegate 
+[access modifier] delegate [return type] delname (param); //must match method signature of methods that to be invoked 
+
+2. declare a var of delegate with "event" keyword 
+[access modifier] event delname eventname; 
