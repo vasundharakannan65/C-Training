@@ -1,0 +1,282 @@
+//Main Program 
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace ProjectA
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Customer custObj = new Customer();
+
+            var CustObj1 = new Customer()
+            {
+                CustId = 1,
+                CustName = "vasu",
+                CustAge = 28,
+                CustBloodGroup = "A+"
+            };
+            var CustObj2 = new Customer()
+            {
+                CustId = 2,
+                CustName = "apple",
+                CustAge = 56,
+                CustBloodGroup = "AB-"
+            };
+            var CustObj3 = new Customer()
+            {
+                CustId = 3,
+                CustName = "mango",
+                CustAge = 45,
+                CustBloodGroup = "O-"
+            };
+            var CustObj4 = new Customer()
+            {
+                CustId = 4,
+                CustName = "orange",
+                CustAge = 38,
+                CustBloodGroup = "B+"
+            };
+ 
+            custObj.AddCustomers(CustObj1);
+            custObj.AddCustomers(CustObj2);
+            custObj.AddCustomers(CustObj3);
+            custObj.AddCustomers(CustObj4);
+
+            custObj.DisplayCustomers();
+
+            Console.WriteLine();
+
+            InsuranceDetails insuranceDetailsObj = new InsuranceDetails();
+
+            var insuranceDetailsObj1 = new InsuranceDetails
+            {
+                InsId = 1,
+                InsValidity = new DateTime(2021, 5, 10),
+                CustId = 1, 
+                CustAge = 32
+
+
+            };
+
+            MedicalInsurance medicalInsuranceObj = new MedicalInsurance(); 
+
+            var medicalInsuranceObj1 = new MedicalInsurance
+            {
+                //InsId = 10,
+                //InsValidity = new DateTime(2021, 5, 10),
+                PremiumAmount = 10000,
+                ListOfAppointmentsCompleted = 1
+
+            };
+
+            var medicalInsuranceObj2 = new MedicalInsurance
+            {
+                InsId = 11,
+                InsValidity = new DateTime(2021, 3, 21),
+                PremiumAmount = 15000,
+                ListOfAppointmentsCompleted = 2
+
+            };
+
+            medicalInsuranceObj.AddMedicalInsurance(medicalInsuranceObj1);
+            medicalInsuranceObj.AddMedicalInsurance(medicalInsuranceObj2);
+
+            medicalInsuranceObj.DisplayMedicalInsurance();
+
+            Console.WriteLine();
+
+            var lifeInsuranceObj = new LifeInsurance();
+
+            var lifeInsuranceObj1 = new LifeInsurance
+            {
+                //Premium amount, Nominee, Maturity date 
+                InsId = 11,
+                InsValidity = new DateTime(2021, 3, 21),
+                PremiumAmount = 12500,
+                Nominee = "apple",
+                MaturityDate = new DateTime(2021, 5, 6)
+            };
+
+            lifeInsuranceObj.AddLifeInsurance(lifeInsuranceObj1);
+
+            lifeInsuranceObj.DisplayLifeInsurance();
+            Console.WriteLine();
+
+
+            custObj.FindBloodGroup(custObj.CustBloodGroup = "A+",medicalInsuranceObj1);
+            
+        }
+    }
+}
+ 
+//Customer 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+//using System.Collections.IEnumerator;
+
+namespace ProjectA
+{
+    //Customer(CustomerID, Name, Age, BloodGroup) 
+
+    //enum BloodGroup
+    //{
+    //    OPos,ONeg,APos,ANeg,BPos,BNeg,ABPos,ABNeg
+    //}
+    public class Customer
+    {
+        public int CustId { get; set; }
+        public string CustName { get; set; }
+        public int CustAge { get; set; }
+        public string CustBloodGroup { get; set; }
+
+
+       
+
+        //public enum BloodGroup { }; 
+
+
+        List<Customer> CustomerList = new List<Customer>();
+
+        public void AddCustomers(Customer customer)
+        {
+            CustomerList.Add(customer); 
+            
+        } 
+
+        public void DisplayCustomers()
+        {
+            foreach(Customer item in CustomerList)
+            {
+                Console.WriteLine($"CustId: {item.CustId} CustName: {item.CustName} CustAge: {item.CustAge} CustBloodgrp: {item.CustBloodGroup}");
+            }
+        } 
+
+        public void FindBloodGroup(string bloodtype, MedicalInsurance medicalInsurance)
+        {
+            this.CustBloodGroup = bloodtype;
+            List<MedicalInsurance> calledMedicalInsuranceList = medicalInsurance.GetList();
+            var resultVal = from m in calledMedicalInsuranceList
+                            join c in CustomerList
+                            on m.InsId equals c.CustId
+                            where (medicalInsurance.ListOfAppointmentsCompleted < 2)
+                            && (medicalInsurance.CustAge < 60)
+                            select new
+                            {
+                                CustName = c.CustName 
+                            };
+
+            foreach (var obj in resultVal)
+            {
+                Console.WriteLine("{0}", obj.CustName);
+            }
+
+
+        }
+    }
+}
+
+//InsuranceDetails 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ProjectA
+{
+    //InsuranceDetails(InsuranceId, Validity, CustomerId, age)
+    public class InsuranceDetails : Customer
+    {
+        public int InsId { get; set; }
+        public DateTime InsValidity { get; set; }
+
+
+        public InsuranceDetails()
+        {
+                
+        }
+    }
+}
+
+//MedicalInsurance 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ProjectA
+{
+    public class MedicalInsurance : InsuranceDetails
+    {
+        //Premium amount, List of appointments completed 
+
+        public double PremiumAmount { get; set; }
+        public int ListOfAppointmentsCompleted { get; set; }
+
+
+        List<MedicalInsurance> MedicalInsuranceList = new List<MedicalInsurance>();
+
+        public List<MedicalInsurance> GetList()
+        {
+            return MedicalInsuranceList;
+        } 
+
+        public void AddMedicalInsurance(MedicalInsurance medicalInsurance)
+        {
+            MedicalInsuranceList.Add(medicalInsurance);
+        }
+
+        public void DisplayMedicalInsurance()
+        {
+            foreach (MedicalInsurance item in MedicalInsuranceList)
+            {
+                Console.WriteLine($"InsId: {item.InsId} InsValidity: {item.InsValidity} PremiumAmount: {item.PremiumAmount} ListOfAppointmentsCompleted: {item.ListOfAppointmentsCompleted}");
+            }
+        }
+    }
+}
+
+//LifeInsurance 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ProjectA
+{
+    class LifeInsurance : InsuranceDetails
+    {
+        //Premium amount, Nominee, Maturity date 
+        public double PremiumAmount { get; set; }
+        public string Nominee { get; set; }
+
+        public DateTime MaturityDate { get; set; }
+
+        List<LifeInsurance> LifeInsuranceList = new List<LifeInsurance>();
+
+
+        public void AddLifeInsurance(LifeInsurance lifeInsurance)
+        {
+            LifeInsuranceList.Add(lifeInsurance);
+        }
+
+        public void DisplayLifeInsurance()
+        {
+            foreach (LifeInsurance item in LifeInsuranceList)
+            {
+                Console.WriteLine($"InsId: {item.InsId} InsValidity: {item.InsValidity} PremiumAmount: {item.PremiumAmount} Nominee: {item.Nominee} MaturityDate: {item.MaturityDate}");
+            }
+        }
+    }
+
+}
