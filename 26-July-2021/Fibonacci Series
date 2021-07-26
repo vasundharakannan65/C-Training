@@ -1,0 +1,33 @@
+using System;
+
+namespace Fibonacci
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Enter the num: ");
+            var myNum = int.Parse(Console.ReadLine());
+
+            for (int i = 0; i < myNum; i++)
+            {
+                Console.Write(FibonacciSeries(i)+" ");
+            }
+        } 
+
+        static int FibonacciSeries(int value)
+        {
+
+            var myResult = ((value == 0) || (value == 1)) ? value : (FibonacciSeries(value - 1) + FibonacciSeries(value - 2));
+            return myResult; 
+
+
+            //if ((value == 0) || (value == 1))
+            //    return value;
+            //else
+            //    return (FibonacciSeries(value - 1) + FibonacciSeries(value - 2));
+
+        }
+    }
+}
+
