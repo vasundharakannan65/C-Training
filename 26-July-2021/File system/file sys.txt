@@ -1,0 +1,54 @@
+File system: 
+
+Namespace used : System.IO;
+file is an ordered and named collection of bytes 
+stream is a sequence of bytes that you can use to read from and write to a backing store
+FileStream is a class used for reading and writing files in C#
+UTF8 which is an encoding standard capable of encoding all 1,112,064 valid character code points in Unicode
+
+absolute path - begins with root directory and follow tree branches upto desired directory 
+		eg: /folder_name/file_name
+relative path - ref. from ur working directory upto desired directory 
+		eg: /.. /.. /Documents 
+
+
+File.Exists() // checks whether file exists or not 
+File.Delete() //deletes the file 
+
+//to create a file
+using (FileStream fs = File.Create(..path))
+{ 	
+	byte[] info = new UTF8Encoding(true).GetBytes("text"); 
+	fs.Write( info ); 
+} 
+
+or 
+
+FileStream fileObj = new FileStream(file Name/Path, FileMode.field, FileAccess.field, FileShare.field); - SYNTAX  
+
+filemode - open,create,append,truncate 
+fileaccess - read,write 
+fileshare - none,read,write,readwrite,delete 
+
+//To read file 
+filemode = open 
+fileaccess = read 
+create a byte[] array and read 
+
+file.ReadAllText() - read the file as 1 string 
+file.ReadAllLines - read each line of file into string array 
+
+//move file src - dest 
+file.move(src,dest) 
+
+//to copy a file 
+File.Copy(sourceFile, destinationFile, true);  
+src,dest,true helps us to overwrite the file
+
+
+We can create Directory using CreateDirectory() 
+to rename/move Move(src,dest) 
+to delete Directory.Delete(Dirrname,true) - first deletes all files & subdir then main directry 
+
+
+ 
