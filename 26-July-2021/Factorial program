@@ -1,0 +1,21 @@
+using System;
+
+namespace FactorialProgram
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Enter the num: ");
+            var myValue = int.Parse(Console.ReadLine());
+
+            Console.WriteLine($"Factorial of {myValue} is {Factorialprogram(myValue)}");
+        } 
+
+        static int Factorialprogram(int num)
+        {
+            var myResult = (num == 1) ? num : Factorialprogram(num - 1) * num;
+            return myResult;
+        }
+    }
+}
