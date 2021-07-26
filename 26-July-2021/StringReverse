@@ -1,0 +1,23 @@
+using System;
+
+namespace FactorialProgram
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Enter the string: ");
+            var myString = Console.ReadLine();
+
+            Console.WriteLine($"String Reverse of {myString} is {StringReverse(myString)}");
+        } 
+
+        static string StringReverse(string str)
+        {
+            if (str.Length > 0)
+                return str[str.Length - 1] + StringReverse(str.Substring(0, str.Length - 1));
+            else
+                return str;
+        }
+    }
+}
