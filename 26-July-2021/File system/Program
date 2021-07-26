@@ -1,0 +1,64 @@
+using System;
+using System.IO;
+using System.Text;
+
+namespace FileProgram
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Enter the string: ");
+            var myString = Console.ReadLine();
+
+            //creating file and appending text
+            using StreamWriter file = new("e:\\text.txt");
+            File.AppendText(myString);
+
+            //checking whether file exists or not
+            if (File.Exists("e:\\text.txt"))
+                Console.WriteLine("File created");
+            else
+                Console.WriteLine("File not found");
+
+            file.Close();
+
+            //reading the file
+            FileStream fRead = new FileStream("e:\\text.txt",
+            FileMode.Open, FileAccess.Read, FileShare.Read);
+            byte[] readArr = new byte[myString.Length];
+
+            while ((fRead.Read(readArr)) > 0)
+            {
+                Console.WriteLine(Encoding.UTF8.GetString(readArr));
+            }
+
+            //delete file
+            File.Delete("e:\\text.txt");
+
+            //copy a file from 1 to another
+            string sourcefile = @"e:\temp1\MyTest.txt";
+            string destfile = @"e:\temp2\MyTest.txt";
+            File.Copy(sourcefile, destfile, true);
+            file.Close();
+
+            //reading through another methods
+            string text = File.ReadAllText("e:\\sampletext.txt");
+            //string text1 = File.ReadAllLines("e:\\sampletext.txt");
+            Console.WriteLine(text);
+
+
+            //moving file
+            string path1 = @"e:\temp1\MyTest.txt";
+            string path2 = @"e:\temp2\MyTest.txt";
+
+            File.Move(path1, path2);
+
+
+
+            Console.ReadKey();
+        } 
+
+        
+    }
+}
