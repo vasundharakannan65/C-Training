@@ -1,0 +1,151 @@
+.container
+{
+    width: 100%; 
+    margin: 0 auto; 
+    height: 100%;
+  
+} 
+
+header,footer,main
+{
+    width: 1300px; 
+    min-height: 60px;
+    background-color: papayawhip;
+    margin: auto;
+} 
+
+
+footer p
+{
+    text-align: center;
+    padding-left: 350px;
+    padding-top: 10px;
+    color:black;
+    font-family: 'Oswald', sans-serif;
+    
+} 
+
+.logo 
+{
+    
+    height: 80px; 
+    width: 50px; 
+    float: left;
+    margin: auto;
+    padding: 1px;
+} 
+
+h1 
+{
+    text-align: center;
+    color: black;
+    font-family: 'Oswald', sans-serif;
+    font-size: 50px; 
+    font-weight: bold;
+} 
+
+img 
+{
+    width: 70px;
+    height: 60px;
+    margin: 10px;
+} 
+
+.first 
+{
+    width: 800px;
+    
+} 
+
+
+.second 
+{
+    width: 400px;
+    
+} 
+
+article 
+{
+    float: left;
+    margin: 10px;
+    width: 63%;
+    
+} 
+
+aside 
+{
+    float: right;
+    margin: 10px;
+    width: 30%;
+    
+}
+  
+main 
+{
+    min-height: 500px;
+} 
+
+main article section p 
+{
+    text-align: justify; 
+    padding:20px; 
+    font-family:Arial, Helvetica, sans-serif;
+    font-size: medium;
+} 
+
+section img 
+{
+    width: 250px;
+    height: 200px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+
+} 
+
+section h1 
+{
+    font-size: 40px;
+}
+aside p 
+{
+    text-align: justify; 
+    padding:20px; 
+    font-family:Arial, Helvetica, sans-serif;
+    font-size: medium;
+} 
+
+aside h1 
+{
+    font-size: large;
+} 
+
+aside img 
+{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+    width: fit-content; 
+    height: 200px;
+} 
+
+nav 
+{
+    background-color: rgb(228, 217, 228);
+    overflow: hidden;
+    position: relative;
+    width: inherit; 
+    
+} 
+
+nav a 
+{
+    float: right;
+    display: block;
+    color: #000000;
+    text-align: center;
+    padding: 14px 16px;
+}
+
