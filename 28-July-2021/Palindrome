@@ -1,0 +1,33 @@
+using System;
+
+namespace Palindrome
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("-----Palindrome-----");
+            Console.WriteLine("Enter the string: ");
+            var myString = Console.ReadLine();
+
+
+            IsPalindromeOrNot(myString);
+
+            Console.ReadKey();
+        } 
+
+        static void IsPalindromeOrNot(string str)
+        {
+            str = str.ToLower();
+            string reversedString = "";
+
+            for (int i = 1; i <= str.Length; i++)
+                reversedString += str[str.Length - i]; 
+
+            if(str.Equals(reversedString)) // ==
+                Console.WriteLine($"The palindrome of {str} is {reversedString}"); 
+            else
+                Console.WriteLine($"{str} is not a palindrome");
+        }
+    }
+}
