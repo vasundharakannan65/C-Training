@@ -1,0 +1,56 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+
+namespace BinarySearch
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("------Binary Search------");
+            Console.WriteLine("Enter the num to be found: ");
+            var myNum = int.Parse(Console.ReadLine());
+
+            int[] myArray = new int[10] { 45,6,16,27,32,99,56,60,88,71 };
+            var myResult = SortAndSearch(myArray, myNum);  
+
+            if(myResult == -1)
+                Console.WriteLine("Not found in the given array"); 
+            else
+                Console.WriteLine($"{myNum} is found at position {myResult}");
+            
+
+        } 
+
+        static int SortAndSearch(int[] myArray,int num)
+        {
+            int low = 0;
+            int high = myArray.Length - 1; 
+
+            for(int i=0; i < myArray.Length; i++)
+                for(int j=0; j < myArray.Length; j++)
+                    if (myArray[i] < myArray[j])
+                    {
+                        myArray[i] = myArray[i] + myArray[j];
+                        myArray[j] = myArray[i] - myArray[j];
+                        myArray[i] = myArray[i] - myArray[j];
+                    }
+
+            while (low <= high)
+            {
+                int mid = (low + high) / 2;
+
+                //checking whether num is equal to mid value
+                if (num == myArray[mid])
+                    return mid; 
+                else if (num < myArray[mid])
+                    high = mid - 1;
+                else
+                    low = mid + 1;
+            }
+            return -1;
+
+            } 
+    }
+}
