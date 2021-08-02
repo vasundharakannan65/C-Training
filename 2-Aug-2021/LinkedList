@@ -1,0 +1,118 @@
+using System;
+
+namespace DSA
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Singly Linked List");
+            LinkedList linkedListObj = new LinkedList();
+
+            linkedListObj.TraverseNode();
+            Console.WriteLine();
+
+            linkedListObj.AddNode(1);
+            linkedListObj.AddNode(2);
+            linkedListObj.AddNode(78);
+
+            linkedListObj.TraverseNode();
+            Console.WriteLine();
+
+            linkedListObj.DeleteNode(2);
+            linkedListObj.TraverseNode();
+
+
+        }
+    }
+}
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DSA
+{
+    class LinkedList
+    {
+        public Node myHead;
+        public Node myCurrent;
+
+        public int myCount { get; set; } 
+
+        public LinkedList()
+        {
+            myHead = new Node();
+            myCurrent = myHead;
+        }
+
+
+        //Adding atlast 
+        public void AddNode(int data)
+        {
+            Node newNode = new Node();
+            newNode.MyData = data;
+            myCurrent.MyNext = newNode;
+            myCurrent = newNode;
+            myCount++;
+        }
+
+        //Deleting node
+        public void DeleteNode(int data)
+        {
+            if (myHead == null) return;
+
+            if (myHead.MyData == data)
+            {
+                myHead = myHead.MyNext;
+                return;
+            }
+
+            var node = myHead;
+            while (node.MyNext != null)
+            {
+                if (node.MyNext.MyData == data)
+                {
+                    node.MyNext = node.MyNext.MyNext;
+                    return;
+                }
+
+                node = node.MyNext;
+            }
+        } 
+
+        //printing or traversing through LL 
+        public void TraverseNode()
+        {
+            Console.Write("Head -> ");
+            Node initial = myHead;
+            while (initial.MyNext != null)
+            {
+                initial = initial.MyNext;
+                Console.Write(initial.MyData);
+                Console.Write(" -> ");
+            }
+            Console.Write("NULL");
+        } 
+
+        
+    }
+}
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DSA
+{
+    class Node
+    {
+        public int MyData { get; set; }
+        public Node MyNext { get; set; } 
+
+    }
+}
