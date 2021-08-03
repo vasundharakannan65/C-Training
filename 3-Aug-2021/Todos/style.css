@@ -1,0 +1,84 @@
+h1 
+{
+    font-family: Arial, Helvetica, sans-serif; 
+    font-size: 40px;; 
+    font-weight: 200; 
+    color:rgb(0, 0, 0); 
+    text-align: center;
+    size: 100px;
+}  
+
+.container-sm
+{
+    width: 400px;
+    margin: 0 auto;
+} 
+
+header  
+{
+    display: block;
+    margin: auto;
+}
+
+main
+{
+    margin: auto;
+    padding: 30px;
+} 
+
+.logo
+{
+    color: rgb(0, 0, 0);
+    float:left;
+    margin: 0 auto 0 auto;
+    padding: 0px 0 0 10px;
+} 
+
+.input-group
+{
+    margin: auto;
+}
+
+.btn 
+{
+    color: whitesmoke;
+} 
+
+#addButton:hover 
+{
+    background-color: rgba(83, 83, 83, 0.466);
+    
+} 
+
+#clearButton:hover 
+{
+    background-color:  rgba(83, 83, 83, 0.466);
+}
+
+ul li.checked 
+{
+    text-decoration: line-through;
+} 
+
+li 
+{
+    list-style-type: square;
+    user-select: none;
+} 
+
+.close 
+{
+    float: right;
+}
+
+#addButton,#clearButton 
+{
+    color: white;
+} 
+
+ul li a 
+{
+    float: right;
+    cursor: pointer;
+
+}
