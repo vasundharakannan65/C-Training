@@ -1,1 +1,30 @@
+using System;
+using System.Linq;
+using System.Collections.Generic;
+
+namespace DSAlg
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int[] myArray = new int[5] { 5, 10, 15, 20, 3 };
+            var myList = new List<int>(); 
+
+            int i = 0; 
+
+            while(i < myArray.Length)
+            {
+                int sum = 0;
+                sum = (myArray.Sum()) - myArray[i];
+                myList.Add(sum);
+                i++;
+            }
+
+            foreach(var ele in myList.ToArray())
+                Console.Write(ele+" ");
+        } 
+
+    }
+}
 
