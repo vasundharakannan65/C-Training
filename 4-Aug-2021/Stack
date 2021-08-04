@@ -1,0 +1,96 @@
+using System;
+
+namespace Stack
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            
+            Stack s1 = new Stack();
+            s1.EmptyOrNot();
+
+            s1 = +s1;
+            
+            s1.Display();
+
+            s1.Pop();
+            s1.Display();
+
+            
+        }
+    }
+}
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Stack
+{
+    class Stack
+    {
+        public int MyTop { get; set; }
+        public int[] ele { get; set; } 
+
+        static readonly int Len = 100;
+
+        int[] stack = new int[Len]; 
+
+        public Stack(int[] e)
+        {
+            this.MyTop = -1;
+            this.ele = e;
+        }
+
+
+        //to check if stack is empty
+        public void EmptyOrNot()
+        {
+            var myResult = (MyTop < 0) ? "Stack is empty" : "Stack is not empty";
+            Console.WriteLine(myResult);
+        }
+
+
+        public static Stack operator +(Stack s)
+        {
+            //s.stack[++s.MyTop] = s.;
+            foreach(var e in s.ele)
+            {
+                s.stack.Append(e);
+                s.MyTop++;
+            }
+            return s;
+        }
+
+        //public void Push(int ele)
+        //{
+        //    if (MyTop >= Len)
+        //        Console.WriteLine("Stack overflow");
+        //    else
+        //        stack[++MyTop] = ele;
+        //} 
+        
+        public void Pop()
+        {   
+            if(MyTop < 0)
+                Console.WriteLine("Stack underflow");
+            else
+            {
+                int value = stack[MyTop--];
+                Console.WriteLine($"Popped element: {value}");
+            }
+        } 
+
+
+        public void Display()
+        {
+            Console.WriteLine("Displaying stack");
+            for (int i = MyTop; i >= 0; i--)
+                Console.WriteLine(stack[i]+" ");
+            
+        }
+    }
+}
