@@ -10,11 +10,22 @@ namespace Stack
             Stack s1 = new Stack();
             s1.EmptyOrNot();
 
-            s1 = +s1;
-            
+            //operator overloading - push()
+            s1 += 1;
+            s1 += 2;
+            s1 += 3;
+            s1 += 4;
+            s1 += 5;
+            s1 += 6;
+
             s1.Display();
 
+            s1.EmptyOrNot(); 
+
             s1.Pop();
+
+            s1.Pop(); 
+
             s1.Display();
 
             
@@ -33,35 +44,28 @@ namespace Stack
     class Stack
     {
         public int MyTop { get; set; }
-        public int[] ele { get; set; } 
 
         static readonly int Len = 100;
 
         int[] stack = new int[Len]; 
 
-        public Stack(int[] e)
+        public Stack()
         {
             this.MyTop = -1;
-            this.ele = e;
         }
 
 
-        //to check if stack is empty
+        //to check if stack is empty or not
         public void EmptyOrNot()
         {
             var myResult = (MyTop < 0) ? "Stack is empty" : "Stack is not empty";
             Console.WriteLine(myResult);
         }
 
-
-        public static Stack operator +(Stack s)
+        //operator overloading
+        public static Stack operator +(Stack s,int n)
         {
-            //s.stack[++s.MyTop] = s.;
-            foreach(var e in s.ele)
-            {
-                s.stack.Append(e);
-                s.MyTop++;
-            }
+            s.stack[++s.MyTop] = n;
             return s;
         }
 
@@ -73,6 +77,7 @@ namespace Stack
         //        stack[++MyTop] = ele;
         //} 
         
+        //to pop the last ele in stack
         public void Pop()
         {   
             if(MyTop < 0)
