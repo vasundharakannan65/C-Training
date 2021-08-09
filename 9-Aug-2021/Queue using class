@@ -1,0 +1,84 @@
+using System;
+
+namespace Queue
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("----Queue----");
+
+            Queue queueObj = new Queue(5);
+
+            queueObj.add(10);
+            queueObj.add(20);
+            queueObj.add(30);
+
+            queueObj.PrintQueue();
+
+            queueObj.remove();
+
+            queueObj.PrintQueue();
+        }
+    }
+}
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Queue
+{
+    class Queue
+    {
+        public int[] myQueue;
+        public int front;
+        public int rear;
+        public int max;
+
+        public Queue(int length)
+        {
+            myQueue = new int[length];
+            front = 0;
+            rear = -1;
+            max = length;
+        } 
+
+        public void add(int element)
+        {
+            if (rear == max - 1)
+                Console.WriteLine("Queue overflow");
+            else
+                myQueue[++rear] = element;
+        } 
+
+        public int remove()
+        {
+            if(front == rear-1)
+            {
+                Console.WriteLine("Queue is empty");
+                return -1;
+            } 
+            else
+            {
+                Console.WriteLine("Deleted element is: "+ myQueue[front]);
+                return myQueue[front++];
+            }
+        } 
+
+        public void PrintQueue()
+        {
+            if(front == rear+1)
+                Console.WriteLine("Queue is empty");
+            else
+            {
+                for (int i = front; i <= rear; i++)
+                {
+                    Console.WriteLine("myQueue[" + (i + 1) + "]: " + myQueue[i]);
+                }
+            }
+        }
+    }
+}
