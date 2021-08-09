@@ -1,0 +1,117 @@
+using System;
+
+namespace QueueLinkedList
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Implementation of Queue using LinkedList");
+
+            Queue queueObj = new Queue();
+
+            queueObj.Enqueue(10);
+            queueObj.Enqueue(20);
+            queueObj.Enqueue(30);
+
+            queueObj.Dequeue();
+
+            //queueObj.Traverse();
+        }
+    }
+}
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace QueueLinkedList
+{
+    class Queue
+    {
+        Node myFront;
+        Node myRear;
+
+        //queue is FIFO - first in first out
+        public Queue()
+        {
+            myFront = myRear = null;
+        }
+
+        //Adding to queue 
+        //enqueue using rear end
+        public void Enqueue(int data)
+        {
+            Node newNode = new Node(data);//creating a node
+
+            if (this.myRear == null)//if queue is empty
+            {
+                this.myFront = this.myRear = newNode;
+            }
+            else
+            {
+                this.myRear.myNext = newNode;//adding at end
+                this.myRear = newNode;
+            }
+            Console.WriteLine("Queue added {0}", data);
+        }
+
+        //deleting in queue
+        //dequeue using front end
+        public void Dequeue()
+        {
+            if (this.myFront == null)//returns null if queue is empty
+            {
+                Console.WriteLine("Queue is empty");
+                return;
+            }
+
+            Node tempNode = this.myFront;
+            this.myFront = this.myFront.myNext;
+
+            Console.WriteLine("Queue deleted {0}", tempNode.myData);
+        } 
+
+        //traversing in queue 
+        public void Traverse()
+        {
+            if(this.myFront == null)
+                Console.WriteLine("Queue is null");
+            else
+            {
+                Console.WriteLine("Queue -> ");
+                Node myCurrent = myFront;
+                while(myCurrent.myNext != null)
+                {
+                    myCurrent = myCurrent.myNext;
+                    Console.Write(myCurrent.myData);
+                    Console.Write(" ->");
+                }
+            }
+        }
+    }
+}
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace QueueLinkedList
+{
+    class Node
+    {
+        public int myData;
+        public Node myNext;
+
+        public Node(int ele)
+        {
+            myData = ele;
+            myNext = null;
+        }
+
+    }
+}
