@@ -1,0 +1,180 @@
+using System;
+
+namespace DoublyLinkedList
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("------------Doubly linked list----------");
+
+            DoublyLL doublyLLObj = new DoublyLL();
+
+            Boolean loopContinue = true; 
+
+            while (loopContinue)
+            {
+
+                Console.WriteLine("Enter the option: 1-Add, 2-Remove, 3-Search, 4-Traverse");
+
+                int choice;
+
+                if (Int32.TryParse(Console.ReadLine(),out choice))
+                {
+                    switch (choice)
+                    {
+                        case 1:
+                            Console.WriteLine("Enter the data to be added:");
+                            var addData = int.Parse(Console.ReadLine());
+                            doublyLLObj.AddNode(addData);
+                            //loopContinue = false;
+                            break;
+
+                        case 2:
+                            Console.WriteLine("Enter the data to be removed:");
+                            var removeData = int.Parse(Console.ReadLine());
+                            doublyLLObj.DeleteNode(removeData);
+                            //loopContinue = false;
+                            break;
+
+                        case 3:
+                            Console.WriteLine("Enter the data to be searched:");
+                            var searchData = int.Parse(Console.ReadLine());
+                            doublyLLObj.SearchNode(searchData);
+                            //loopContinue = false;
+                            break;
+
+                        case 4:
+                            Console.WriteLine("Traversing through the nodes:");
+                            doublyLLObj.TraverseNode();
+                            break;
+
+                        default:
+                            Console.WriteLine("\nPlease enter valid option");
+                            loopContinue = false;
+                            break;
+                    }
+
+                }
+            }
+
+        }
+    }
+}
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DoublyLinkedList
+{
+    class DoublyLL
+    {
+        public Node myHead;
+        public Node myCurrent;
+        public int myCount;
+        public int myFlag = 0;
+
+        public DoublyLL()
+        {
+            myHead = new Node();
+            myCurrent = myHead;
+        }
+
+        //adding node
+        public void AddNode(int data)
+        {
+            Node newNode = new Node();
+            newNode.MyPrev= null;
+            newNode.MyData = data;
+            myCurrent.MyNext = newNode;
+            myCurrent = newNode;
+            myCount++;
+        }
+
+        //delete node
+        public void DeleteNode(int data)
+        {
+            if (myHead == null) return;
+
+            if (myHead.MyData == data)
+            {
+                myHead = myHead.MyNext;
+                return;
+            }
+
+            var node = myHead;
+            while (node.MyNext != null)
+            {
+                if (node.MyNext.MyData == data)
+                {
+                    node.MyNext = node.MyNext.MyNext;
+                    return;
+                }
+
+                node = node.MyNext;
+            }
+        }
+
+
+        //traversing
+        public void TraverseNode()
+        {
+                Console.Write("Head -> ");
+                Node initial = myHead;
+                while (initial.MyNext != null)
+                {
+                    initial = initial.MyNext;
+                    Console.Write(initial.MyData);
+                    Console.Write(" -> ");
+                }
+                Console.Write("NULL");
+        } 
+
+        //searching data 
+        public void SearchNode(int data)
+        {
+            if(myHead.MyNext == null)
+                Console.WriteLine("\n No node available to search through");
+            else
+            {
+                Node initial = myHead; 
+                while(initial.MyNext != null)
+                {
+                    if(initial.MyData == data)
+                    {
+                        Console.WriteLine("\ndata found");
+                        break;
+                    }
+                    else
+                    {
+                        initial = initial.MyNext;
+                    }
+                }
+                Console.WriteLine("\nnot found");
+
+            }
+        } 
+
+
+    }
+}
+ 
+ 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DoublyLinkedList
+{
+    class Node
+    {
+        public Node MyPrev { get; set; }
+        public int MyData { get; set; }
+        public Node MyNext { get; set; }
+    }
+}
