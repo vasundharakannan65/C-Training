@@ -1,0 +1,69 @@
+using System;
+using System.IO;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace FS
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string srcPath = @"E:\FileSystem\";
+
+            string newDestPath = @"E:\NewFileSystem\";
+
+            if(!Directory.Exists(newDestPath))
+            {
+                Directory.CreateDirectory(newDestPath);
+            }
+
+            string searchPhrase = @"Gislen Software";
+
+            DirectoryInfo dir = new DirectoryInfo(srcPath);
+
+            IEnumerable<FileInfo> fileList = dir.GetFiles("*.*", SearchOption.AllDirectories);
+
+            IEnumerable<FileInfo> fileQuery =
+                from file in fileList
+                where file.Extension == ".txt"
+                select file;
+
+            foreach (FileInfo file in fileQuery)
+            {
+                FileStream fs = file.Open(FileMode.Open, FileAccess.Read);
+
+                StreamReader sr = new StreamReader(fs);
+
+                string fileContent = sr.ReadToEnd();
+
+                if (fileContent.Contains(searchPhrase) == true)
+                { 
+                    var fileName = Path.GetFileName(file.DirectoryName);
+                    var destFile = Path.Combine(newDestPath, fileName);
+                    File.Copy(file.ToString(), destFile, true);
+                    fs.Close();
+                }
+            }
+
+            Console.WriteLine("Press any key to exit");
+            Console.ReadKey();
+
+        } 
+
+    }
+}
+
+  E:
+      FileSystem 
+                 Essays 
+                       Environmental Essays 
+                                           text5.txt 
+                                           text6.txt
+                                           text7.txt
+                       Recent Essys 
+                       Small Essays
+                                    text1.txt 
+                                    text2.txt 
+                                    text3.txt
