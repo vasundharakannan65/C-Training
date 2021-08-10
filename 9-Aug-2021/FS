@@ -2,7 +2,6 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace FS
 {
@@ -25,6 +24,20 @@ namespace FS
 
             IEnumerable<FileInfo> fileList = dir.GetFiles("*.*", SearchOption.AllDirectories);
 
+            CopyFile(fileList,searchPhrase,newDestPath);
+
+            MoveFile(fileList,newDestPath);
+
+
+            Console.WriteLine("Press any key to exit");
+            Console.ReadKey();
+
+        }
+
+
+        //copying files to new location if file contains "Gislen Software"
+        static void CopyFile(IEnumerable<FileInfo> fileList,string searchPhrase,string newDestPath)
+        {
             IEnumerable<FileInfo> fileQuery =
                 from file in fileList
                 where file.Extension == ".txt"
@@ -39,26 +52,44 @@ namespace FS
                 string fileContent = sr.ReadToEnd();
 
                 if (fileContent.Contains(searchPhrase) == true)
-                { 
-                    var fileName = Path.GetFileName(file.DirectoryName);
-                    var destFile = Path.Combine(newDestPath, fileName);
-                    File.Copy(file.ToString(), destFile, true);
+                {
                     fs.Close();
+                    var destFile = Path.Combine(newDestPath, file.Name);
+                    File.Copy(file.ToString(), destFile, true);
                 }
+                fs.Close();
+
+            }
+            Console.WriteLine("Files copied to new location successfully!");
+        }
+
+
+        //moving img files to new location if file size is above 500kb & .jpg
+        static void MoveFile(IEnumerable<FileInfo> fileList, string newDestPath)
+        {
+            IEnumerable<FileInfo> imgQuery =
+                from file in fileList
+                where file.Extension == ".jpg"
+                where file.Length > 500
+                select file;
+
+            foreach (FileInfo file in imgQuery)
+            {
+                var destFile = Path.Combine(newDestPath, file.Name);
+                File.Move(file.ToString(), destFile);
             }
 
-            Console.WriteLine("Press any key to exit");
-            Console.ReadKey();
-
-        } 
+            Console.WriteLine("ImgFiles moved to new location successfully!");
+        }
 
     }
 }
 
+
   E:
-      FileSystem 
+    FileSystem 
                  Essays 
-                       Environmental Essays 
+                          Environmental Essays 
                                            text5.txt 
                                            text6.txt
                                            text7.txt
